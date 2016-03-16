@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'MainController', ($timeout) ->
+  .controller 'LoginController', ($timeout) ->
     'ngInject'
     vm = this
     

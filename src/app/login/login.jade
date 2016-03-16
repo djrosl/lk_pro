@@ -1,0 +1,32 @@
+.login-page.vertical-center
+  .text-center(ng-init="curTab='login'")
+    img.logo(src='/assets/images/logo.png')
+    form.form.signin-block(ng-show="curTab=='login'")
+      .info-text Введите правильные Имя пользователя и Пароль
+      .form-group
+        input.login-page-control.username(type="text" placeholder="Имя пользователя")
+      .form-group
+        input.login-page-control.password(type="password" placeholder="Пароль")
+      .form-group.text-left
+        input.login-checkbox(type="checkbox" id="remember")
+        label.login-label(for="remember") Запомнить меня
+      .btn-group-login
+        button.btn.btn-warning.pull-left(ng-click="curTab = 'register'") Регистрация
+        button.btn.btn-primary.pull-right Вход
+    form.form.register-block(ng-show="curTab=='register'")
+      .form-group.green-label
+        input.login-page-control.code(type="text" placeholder="Код для регистрации")
+      .form-group.green-label
+        input.login-page-control.username(type="text" placeholder="Имя пользователя")
+      .form-group.green-label
+        input.login-page-control.password(type="password" placeholder="Пароль")
+      .form-group.green-label
+        input.login-page-control.email(type="text" placeholder="E-mail")
+      br
+      .form-group
+        input.login-page-control.jabber(type="text" placeholder="Jabber")
+      .form-group
+        input.login-page-control.icq(type="text" placeholder="ICQ")
+      .btn-group-login
+        button.btn.btn-warning.pull-left(ng-click="curTab = 'login'") Назад
+        button.btn.btn-primary.pull-right Подтвердить
