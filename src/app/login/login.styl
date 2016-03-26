@@ -1,5 +1,12 @@
+.login-wrapper
+  position: absolute!important;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
 .login-page
-  background url('/assets/images/bg.png') center top / cover no-repeat
+  //background url('/assets/images/bg.png') center top / cover no-repeat
   min-height 100vh
   color #fff
   overflow hidden
@@ -28,6 +35,10 @@
     z-index 1
   > div
     padding-bottom 50px
+  .btn
+    font-size 18px
+    font-weight 600
+    padding 9px 30px
 input.login-page-control
   color rgb(204, 204, 204)
   font-size 18px
@@ -41,30 +52,35 @@ input.login-page-control
   min-width 345px
   width 100%
   outline none
+  transition all .4s
   &:focus
     outline 1px solid #256ca8
   &.username
-    background rgba(153, 153, 153, 0.15) url(/assets/images/username_icon.png) right 10px center no-repeat
+    background rgba(153, 153, 153, 0.15) url(/assets/images/username_icon.png) -40px center no-repeat
   &.password
-    background rgba(153, 153, 153, 0.15) url(/assets/images/password_icon.png) right 10px center no-repeat
+    background rgba(153, 153, 153, 0.15) url(/assets/images/password_icon.png) -40px center no-repeat
   &.code
-    background rgba(153, 153, 153, 0.15) url(/assets/images/code_icon.png) right 10px center no-repeat
+    background rgba(153, 153, 153, 0.15) url(/assets/images/code_icon.png) -40px center no-repeat
   &.email
-    background rgba(153, 153, 153, 0.15) url(/assets/images/email_icon.png) right 10px center no-repeat
+    background rgba(153, 153, 153, 0.15) url(/assets/images/email_icon.png) -40px center no-repeat
   &.jabber
-    background rgba(153, 153, 153, 0.15) url(/assets/images/jabber_icon.png) right 10px center no-repeat
+    background rgba(153, 153, 153, 0.15) url(/assets/images/jabber_icon.png) -40px center no-repeat
   &.icq
-    background rgba(153, 153, 153, 0.15) url(/assets/images/icq_icon.png) right 10px center no-repeat
+    background rgba(153, 153, 153, 0.15) url(/assets/images/icq_icon.png) -40px center no-repeat
+  &:focus
+    background-position 15px center
+    padding-left 50px
     
 .btn-group-login
   position relative
   z-index 1
 label.login-label
-  font-family Helvetica Neue Cyr
+  //font-family Helvetica Neue Cyr
   font-size 16px
   font-weight 100
   line-height 20px
   vertical-align middle
+  margin-bottom 8px
 input.login-checkbox
   width 15px
   height 15px

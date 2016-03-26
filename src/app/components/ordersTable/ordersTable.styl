@@ -1,0 +1,71 @@
+.table-container
+  .pagination
+    text-align center
+    &.top
+      margin 30px 0 10px 0
+    &.bottom
+      margin 10px 0 30px 0
+    width 100%
+    .btn-left
+      background url('/assets/images/left.png') center center no-repeat
+      border none
+    .btn-right
+      background url('/assets/images/right.png') center center no-repeat
+      border none
+    .btn
+      margin 0 5px
+  .table
+    td,
+    th
+      position relative
+      &:before
+        content ''
+        position: absolute
+        left: 0
+        top: 15%
+        height: calc(100% - 30%)
+        width: 1px
+      vertical-align middle
+      font-weight 300
+      border-bottom none
+      &:first-child
+        text-align center
+        &:before
+          display none
+      a
+        color: rgb(51, 153, 102)
+        font-weight: 600
+        text-decoration: underline
+        &:hover
+          text-decoration none
+    th
+      &:before
+        background: #fff
+      color #fff
+      font-size 20px
+    td:before
+      background-color: rgb(204, 204, 204);
+    thead
+      background-color: rgb(4, 156, 219)
+    td
+      &:nth-child(2)
+        font-size 18px
+      &:nth-child(4)
+        font-size 16px
+      span
+        color #fff
+        padding 2px 3px
+        font-weight 400
+        strike
+          color #ccc
+        border-radius 3px
+        margin 3px
+        display inline-block
+        font-size 12px
+        background-color: rgb(153, 153, 153)
+        &.red
+          background-color: rgb(204, 0, 0)
+        &.green
+          background-color: rgb(51, 153, 0)
+        &.orange
+          background-color: rgb(255, 153, 0)

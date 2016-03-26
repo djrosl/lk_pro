@@ -5,6 +5,11 @@
 $navbar-inverse-link-color = #5AADBB
 $icon-font-path = "../../bower_components/bootstrap-stylus/fonts/"
 
+$brand-primary ?=       #049cdb // #337ab7
+$brand-info ?=          #5bc0de
+$brand-warning ?=       #f0ad4e
+$brand-danger ?=        #d9534f
+
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
  *  stylus dependencies when defined in the bower.json of your dependencies
@@ -22,12 +27,90 @@ body
   display -o-flex
   display flex
   align-items center
-    
-.btn
-  font-size 18px
-  font-weight 600
-  padding 9px 30px
 
+.justify-elements-container
+  > *
+    display block
+  display: -webkit-box;
+  -webkit-box-pack: justify;
+  -webkit-box-align: center;
+  display: -moz-box;
+  -moz-box-pack: justify;
+  -moz-box-align: center;
+  display: -ms-flexbox;
+  -ms-flex-pack: justify;
+  -ms-flex-align: center;
+  display: box;
+  box-pack: justify;
+  box-align: center;
+  /*text-align: justify
+  -ms-text-justify: distribute-all-lines
+  text-justify: distribute-all-lines
+  > *:not(.stretch)
+    vertical-align: top;
+    display: inline-block;
+    *display: inline;
+    zoom: 1
+  .stretch
+    width: 100%;
+    display: inline-block;
+    font-size: 0;
+    line-height: 0*/
+
+
+.container-fluid.blue
+  background-color: rgb(4, 156, 219);
+  h1.h1
+    color: rgb(255, 255, 255);
+    font-size: 36px;
+    padding-bottom 15px
+    font-weight 700
+  i
+    margin-right 15px
+.container
+  .tabs
+    margin-top 15px
+    .btn
+      padding-left 95px
+      padding-right 95px
+      outline none
+      i 
+        padding-right 5px
+      &.btn-primary
+        border-radius 4px 4px 0 0
+        background-color: rgb(4, 156, 219);
+        border none
+        padding-top 8px
+        padding-bottom 8px
+        cursor default
+      &.btn-default
+        color: rgb(153, 153, 153);
+        background-color: rgb(255, 255, 255);
+        background-image: linear-gradient(to top, rgb(221, 221, 221) 0%, rgb(247, 247, 247) 100%);
+        border: 1px solid rgb(231, 231, 231);
+        border-radius: 4px;
+.btn.btn-option
+  width 100%
+  background none
+  color rgb(4, 156, 219)
+  border 1px solid rgb(4, 156, 219)
+  padding 1px 4px
+  font-size 12px
+  font-weight 400
+  margin 5px 0
+  border-radius 2px
+  text-align left
+  i.fa.fa-ban
+    color rgb(204, 0, 0)
+  i
+    padding-right 4px
+  &:hover,
+  &.active
+    color #fff
+    background-color: rgb(4, 156, 219)
+.center-block
+  float none !important
+  margin 0 auto
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

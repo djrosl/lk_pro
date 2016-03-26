@@ -1,0 +1,19 @@
+.btn.btn-question.pull-right.tooltip-listener(ng-click="isOpened = !isOpened" ng-class="{'active': isOpened}") ?
+  .tooltip-wrapper(ng-show="isOpened" ng-click="$event.stopPropagation()")
+    nav.rows.clearfix(ng-init="activeTab = 0")
+      a.col-md-4(ng-click="activeTab = 0" ng-class="{'active': activeTab === 0}")
+        i.fa.fa-question-circle
+        span Справка
+      a.col-md-4(ng-click="activeTab = 1" ng-class="{'active': activeTab === 1}")
+        i.fa.fa-file-text
+        span Пример отчета
+      a.col-md-4(ng-click="activeTab = 2" ng-class="{'active': activeTab === 2}")
+        i.fa.fa-hourglass
+        span Время исполнения
+    .rows.clearfix
+      .content.col-md-12(ng-show="activeTab === 0")
+        p(ng-bind-html="tooltip.help")
+      .content.col-md-12(ng-show="activeTab === 1")
+        p(ng-bind-html="tooltip.example")
+      .content.col-md-12(ng-show="activeTab === 2")
+        p(ng-bind-html="tooltip.time")

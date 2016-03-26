@@ -1,0 +1,149 @@
+.container-fluid.blue
+  .container.text-center
+    h1.h1
+      i.fa.fa-briefcase
+      | Проверить юр. лицо
+
+.container.entity
+  .blocks
+    .block
+      header.bg-primary
+        span.num 1
+        span.header-content База данных
+      .content.clearfix
+        p.bg-success Выберите проверку по одному или нескольким бюро кредитных историй
+        .col-md-12
+          .block-item
+            .row
+              .col-md-7
+                .row
+                  .col-md-3.text-center
+                    img(src="/assets/images/nbki.png", alt="")
+                  .col-md-9
+                    b НБКИ: 
+                    | Национальное Бюро Кредитных Историй
+                    h6 Самое популярное бюро
+                  .col-md-10
+                    .btn.btn-default.pull-left.justify-elements-container 
+                      span Выписка по юр. лицу 
+                      span 250P
+                    tooltip#t1(content="entity.tooltipContent")
+              .col-md-5
+                .row
+                  .col-md-3
+                    .bg-important.text-center ВАЖНО!
+                  .col-md-9
+                    | Здесь не видны кредиты трех крупнейших банков:
+                    br
+                    b “Хоум Кредит”
+                    br
+                    b “Русский Стандарт”
+                    br
+                    b “Сбербанк”
+        .col-md-6
+          .block-item
+            .row
+              .col-md-4.text-center
+                img(src="/assets/images/ni.png", alt="")
+              .col-md-8
+                b Проверка налоговой инспекцией
+                p Выписка из налоговой со всеми счетами юр.лица, как открытыми, так и закрытыми.       
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Проверка счетов
+                  span 800P
+                tooltip(content="entity.tooltipContent")
+        .col-md-6
+          .block-item
+            .row
+              .col-md-4.text-center
+                img(src="/assets/images/spark.png", alt="")
+              .col-md-8
+                b Проверка налоговой инспекцией
+                p 
+                  | Для заказа необходимы:
+                  br
+                  span.green Название, ИНН или ОГРН, регион
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Заказать выписку
+                  span 200P
+                tooltip(content="entity.tooltipContent")
+        .col-md-6
+          .block-item
+            .row
+              .col-md-12
+                b Выписка из ЕГРЮЛ
+                p В краткой выписке содержатся сведения об адресе, руководителе, учредителях организации и видах экономической деятельности             
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Краткая выписка ЕГРЮЛ
+                  span 250P
+                tooltip(content="entity.tooltipContent")
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Полная выписка из ЕГРЮЛ
+                  span 400P
+                tooltip(content="entity.tooltipContent")
+        .col-md-6
+          .block-item
+            .row
+              .col-md-4.text-center
+                img(src="/assets/images/sb.png", alt="")
+              .col-md-8
+                b Проверка СБ
+                p Проверка юр. лица по базам Межбанка и Альфа-банка (Обработка заказов в будни, в рабочее время по МСК) 
+                p.green Для заказа необходимы: 
+                  br 
+                  |Название фирмы, ИНН, телефон
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Проверка на негатив (краткая)
+                  span 350P
+                tooltip(content="entity.tooltipContent")
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Проверка на негатив (полная)
+                  span 300P
+                tooltip#tooo(content="entity.tooltipContent")
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Проверка телефона на подачу
+                  span 200P
+                tooltip(content="entity.tooltipContent")
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Комплексная проверка
+                  span 1100P
+                tooltip(content="entity.tooltipContent")
+        
+    .block.personal-data
+      header.bg-primary
+        span.num 2
+        span.header-content Юридическое лицо
+      .content.clearfix
+        p.bg-success Введите название юридического лица, ИНН или ОГРН
+        .col-md-12
+          form.form-inline(action="")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Название юр. лица")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="ИНН")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="ОГРН")
+
+  .row.submit-row
+    .col-md-9.text-right.left
+      .sum-wrp
+        span Сумма заказа:
+        span.sum 5600P
+    .col-md-3.right
+      .btn.btn-success.btn-lg Заказать

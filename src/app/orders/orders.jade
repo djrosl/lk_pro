@@ -1,0 +1,12 @@
+dashboard-header
+.container
+  .row.tabs
+    .col-md-12
+      a.btn(ui-sref=".current" ng-class="{'btn-primary':activeTab == 'current', 'btn-default':activeTab != 'current'}") 
+        i.fa.fa-list 
+        | Текущие заказы
+      a.btn(ui-sref=".archive" ng-class="{'btn-primary':activeTab == 'archive', 'btn-default':activeTab != 'archive'}")
+        i.fa.fa-archive
+        | Архивные заказы
+ui-view
+#dashboard-footer

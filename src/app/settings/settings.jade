@@ -1,0 +1,35 @@
+dashboard-header
+.container-fluid.blue.push-header
+  .container.text-center
+    h1.h1
+      i.fa.fa-cog
+      span Настройки
+.container.settings
+  .col-md-5.center-block
+    .blocks
+      .block
+        header.bg-primary
+          span Настройки
+        .content.clearfix
+          .col-md-12
+            form.form
+              .form-group
+                label(for="inp1") Имя пользователя
+                input#inp1.form-control(type="text")
+              .form-group
+                label(for="inp2") Новый пароль
+                input#inp2.form-control(type="text")
+              .form-group
+                label(for="inp3") Подтвердите пароль
+                input#inp3.form-control(type="text")
+              .form-group
+                label(for="inp4") E-mail
+                input#inp4.form-control(type="text")
+              .form-group
+                label(for="inp5") ICQ
+                input#inp5.form-control(type="text")
+              .form-group
+                label(for="inp6") Jabber
+                input#inp6.form-control(type="text")
+              .form-group
+                button.btn.btn-lg.btn-success Обновить данные

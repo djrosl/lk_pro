@@ -1,0 +1,13 @@
+dashboard-header
+.container-fluid.blue.push-header
+  .container.text-center
+    h1.h1.vertical-middle
+      img.header-icon(src="/assets/images/purse.png", alt="")
+      span Пополнить баланс
+.container.payment
+  .text-center
+    a.btn.btn-option(ui-sref=".auto" ng-class="{'active': activeTab == 'auto'}") Автоматическая оплата
+    a.btn.btn-option(ui-sref=".cash" ng-class="{'active': activeTab == 'cash'}") Оплата наличными
+    a.btn.btn-option(ui-sref=".history" ng-class="{'active': activeTab == 'history'}") История оплат
+    
+ui-view

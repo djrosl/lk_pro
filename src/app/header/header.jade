@@ -1,0 +1,35 @@
+header.main  
+  .container
+    .row.header-top
+      .col-md-3
+        a(ui-sref="login")
+          img(src="assets/images/dash-logo.png")
+      .col-md-6
+        nav
+          a(ui-sref="add.individual" ng-class="{active: add.mainMenuActive == 'add'}")
+            i.fa.fa-plus
+            | Новый заказ
+          a(ui-sref="orders.current" ng-class="{active: orders.mainMenuActive == 'orders'}")
+            i.fa.fa-list
+            | Мои заказы
+          a(ui-sref="help" ng-class="{active: help.mainMenuActive == 'help'}")
+            i.fa.fa-question-circle
+            | Помощь
+      .col-md-3.text-right
+        button.btn.btn-cash 3000Р
+        span.user-nickname credit-service
+    .row.header-middle
+      .col-md-4
+        .info-box.text-center
+          | Попробуйте сервис по генерации справок
+          br
+          a 2НДФЛ
+      .col-md-4
+        .info-box.text-center
+          | Уважаемые клиенты!
+          br
+          | Киви принимаем на номер 
+          br
+          b +79254467120
+      .col-md-4
+        .info-box.text-center Спарк не работает

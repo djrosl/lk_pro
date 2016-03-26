@@ -1,6 +1,6 @@
 angular.module 'frontend'
-  .controller 'MainController', ($timeout) ->
+  .controller 'PaymentController', () ->
     'ngInject'
     vm = this
-    
+
     return

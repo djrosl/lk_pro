@@ -1,7 +1,8 @@
-.login-page.vertical-center
-  .text-center(ng-init="curTab='login'")
+.login-wrapper
+.login-page.vertical-center(vegas="login.vegasConfig")
+  .text-center(ng-init="login.curTab='login'")
     img.logo(src='/assets/images/logo.png')
-    form.form.signin-block(ng-show="curTab=='login'")
+    form.form.signin-block(ng-show="login.curTab=='login'")
       .info-text Введите правильные Имя пользователя и Пароль
       .form-group
         input.login-page-control.username(type="text" placeholder="Имя пользователя")
@@ -11,9 +12,9 @@
         input.login-checkbox(type="checkbox" id="remember")
         label.login-label(for="remember") Запомнить меня
       .btn-group-login
-        button.btn.btn-warning.pull-left(ng-click="curTab = 'register'") Регистрация
-        button.btn.btn-primary.pull-right Вход
-    form.form.register-block(ng-show="curTab=='register'")
+        button.btn.btn-warning.pull-left(ng-click="login.curTab = 'register'") Регистрация
+        a.btn.btn-primary.pull-right(ui-sref="orders") Вход
+    form.form.register-block(ng-show="login.curTab=='register'")
       .form-group.green-label
         input.login-page-control.code(type="text" placeholder="Код для регистрации")
       .form-group.green-label
@@ -28,5 +29,5 @@
       .form-group
         input.login-page-control.icq(type="text" placeholder="ICQ")
       .btn-group-login
-        button.btn.btn-warning.pull-left(ng-click="curTab = 'login'") Назад
-        button.btn.btn-primary.pull-right Подтвердить
+        button.btn.btn-warning.pull-left(ng-click="login.curTab = 'login'") Назад
+        a.btn.btn-primary.pull-right(ui-sref="orders") Подтвердить

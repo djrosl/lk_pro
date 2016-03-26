@@ -1,0 +1,42 @@
+.container.payment
+  .col-md-5.center-block.ya-cash
+      .content.text-left
+        p Перечислите деньги на один из наших кошельков:
+        br
+        .col-md-2
+          img(src="/assets/images/ya-icon.png", alt="")
+        .col-md-10
+          p 
+           |Яндекс.Деньги: 
+           b 410011962071748
+        .col-md-2
+          img(src="/assets/images/qicon.png", alt="")
+        .col-md-10
+          p 
+           | QIWI: 
+           b 79254467120
+          br
+        p После этого заполните форму и загрузите скан или фотографию чека:
+
+        form.form
+          .form-group
+            label(for="inp1") Сумма *
+            input#inp1.form-control(type="text")
+          .form-group
+            label(for="inp2") Дата *
+            input#inp2.form-control(type="text")
+          .form-group
+            label(for="inp3") Способ оплаты *
+            select#inp3.form-control
+              option(value="") option
+              option(value="") option
+              option(value="") option
+          .form-group
+            label(for="inp4") Фото чека *
+            br
+            label.styled-file(for="inp4") Выберите файл
+            input#inp4(type="file", name="")
+        
+      .text-center
+        button.btn.btn-success.btn-lg Оплатить
+      p.fs16 Или свяжитесь с нами и сообщите свой логин, сумму и время платежа. Мы проверим данные и зачислим сумму на ваш счет.
