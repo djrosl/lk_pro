@@ -1,5 +1,5 @@
 .btn.btn-question.pull-right.tooltip-listener(ng-click="isOpened = !isOpened" ng-class="{'active': isOpened}") ?
-  .tooltip-wrapper(ng-show="isOpened" ng-click="$event.stopPropagation()")
+  .tooltip-wrapper(ng-show="isOpened" ng-click="$event.stopPropagation()" ng-class="{'centered': tooltip.classLeft}")
     nav.rows.clearfix(ng-init="activeTab = 0")
       a.col-md-4(ng-click="activeTab = 0" ng-class="{'active': activeTab === 0}")
         i.fa.fa-question-circle

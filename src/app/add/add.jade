@@ -1,12 +1,10 @@
-dashboard-header
+#dashboard-header
 .container
   .row.tabs
     .col-md-12
-      a.btn(ui-sref=".individual" ng-class="{'btn-primary':activeTab == 'individual', 'btn-default':activeTab != 'individual'}") 
-        i.fa.fa-user 
-        | Проверить физ. лицо
-      a.btn(ui-sref=".entity" ng-class="{'btn-primary':activeTab == 'entity', 'btn-default':activeTab != 'entity'}")
-        i.fa.fa-briefcase
-        | Проверить юр. лицо
-ui-view
-#dashboard-footer
+      
+      button.btn(ng-repeat="type in add.types" ng-click="add.activeSlug = type.slug" ng-class="{'btn-primary':type.slug == add.activeSlug, 'btn-default':type.slug != add.activeSlug}") 
+        i(class="{{type.icon_class}}")
+        | {{type.show_title}}
+
+request-form(slug="{{add.activeSlug}}")

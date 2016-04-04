@@ -1,5 +1,5 @@
-dashboard-header
-.container
+#dashboard-header
+.container(ng-cloak)
   .row.tabs
     .col-md-12
       a.btn(ui-sref=".current" ng-class="{'btn-primary':activeTab == 'current', 'btn-default':activeTab != 'current'}") 
@@ -9,4 +9,3 @@ dashboard-header
         i.fa.fa-archive
         | Архивные заказы
 ui-view
-#dashboard-footer

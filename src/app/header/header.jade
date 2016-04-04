@@ -6,7 +6,7 @@ header.main
           img(src="assets/images/dash-logo.png")
       .col-md-6
         nav
-          a(ui-sref="add.individual" ng-class="{active: add.mainMenuActive == 'add'}")
+          a(ui-sref="add" ng-class="{active: add.mainMenuActive == 'add'}")
             i.fa.fa-plus
             | Новый заказ
           a(ui-sref="orders.current" ng-class="{active: orders.mainMenuActive == 'orders'}")
@@ -19,17 +19,5 @@ header.main
         button.btn.btn-cash 3000Р
         span.user-nickname credit-service
     .row.header-middle
-      .col-md-4
-        .info-box.text-center
-          | Попробуйте сервис по генерации справок
-          br
-          a 2НДФЛ
-      .col-md-4
-        .info-box.text-center
-          | Уважаемые клиенты!
-          br
-          | Киви принимаем на номер 
-          br
-          b +79254467120
-      .col-md-4
-        .info-box.text-center Спарк не работает
+      .col-md-4(ng-repeat="column in header.columns")
+        .info-box.text-center(ng-bind-html="column")

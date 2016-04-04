@@ -2,7 +2,7 @@ angular.module 'frontend'
   .directive 'tooltip', ->
     {
       restrict: 'E'
-      templateUrl: 'app/tooltip/tooltip.html'
+      templateUrl: 'app/components/tooltip/tooltip.html'
       scope:
         content: "="
       transclude: false

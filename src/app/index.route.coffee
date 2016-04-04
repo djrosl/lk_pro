@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .config ($stateProvider, $urlRouterProvider) ->
+  .config ($stateProvider, $urlRouterProvider, $httpProvider) ->
     'ngInject'
     $stateProvider
       .state 'orders',
@@ -18,20 +18,10 @@ angular.module 'frontend'
         controller: 'OrdersArchiveController'
         controllerAs: 'archive'
       .state 'add',
-        url: '/add'
+        url: '/add/'
         templateUrl: 'app/add/add.html'
         controller: 'AddController'
         controllerAs: 'add'
-      .state 'add.individual',
-        url: '/individual'
-        templateUrl: 'app/add/add-individual.html'
-        controller: 'AddIndividualController'
-        controllerAs: 'individual'
-      .state 'add.entity',
-        url: '/entity'
-        templateUrl: 'app/add/add-entity.html'
-        controller: 'AddEntityController'
-        controllerAs: 'entity'
       .state 'help',
         url: '/help'
         templateUrl: 'app/help/help.html'
@@ -69,3 +59,4 @@ angular.module 'frontend'
         controllerAs: 'login'
 
     $urlRouterProvider.otherwise '/'
+    $httpProvider.interceptors.push 'authInterceptor'

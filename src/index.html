@@ -6,6 +6,13 @@
     <base href="/">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    
+    <style type="text/css">
+        [ng-cloak] {
+            display: none !important;
+        }
+    </style>
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
 
@@ -23,7 +30,7 @@
     <!-- endinject-->
     <!-- endbuild-->
   </head>
-  <body>
+  <body ng-class="{'hidden':!loaded}">
     <!--if lt IE 10
     p.browsehappy
       | You are using an
@@ -32,6 +39,7 @@
       a(href='http://browsehappy.com/') upgrade your browser
       |  to improve your experience.
     -->
+    <dashboard-header ng-if="!loginPage"></dashboard-header>
     <div ui-view=""></div>
     <!-- build:js(src) scripts/vendor.js-->
     <!-- bower:js-->

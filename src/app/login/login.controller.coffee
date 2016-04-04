@@ -1,7 +1,47 @@
 angular.module 'frontend'
-  .controller 'LoginController', ($timeout) ->
+  .controller 'LoginController', ($timeout, $http, $window, $state) ->
     'ngInject'
     vm = this
+
+    if $window.sessionStorage.access_token
+      $state.go 'orders.current'
+
+    vm.loginForm = ->
+      vm.submitted = true
+      vm.error = {}
+      console.log vm.userModel
+      req =
+        url: 'http://lkpro.loc/api/login'
+        data: vm.userModel
+        method: 'post'
+      $http(req)
+      .success((data) ->
+        $window.sessionStorage.access_token = data.access_token
+        $state.go 'orders'
+      ).error (data) ->
+        console.log data
+        angular.forEach data, (error) ->
+          vm.error[error.field] = error.message
+    vm.registerForm = ->
+      vm.submitted = true
+      vm.registerError = {}
+      console.log vm.registerModel
+      req =
+        url: 'http://lkpro.loc/api/register'
+        data: vm.registerModel
+        method: 'post'
+      $http(req)
+      .success((data) ->
+        $window.sessionStorage.access_token = data.access_token
+        $state.go 'add'
+      ).error (data) ->
+        console.log data
+        angular.forEach data, (error) ->
+          vm.registerError[error.field] = error.message
+
+
+
+
     vm.vegasConfig =
       slides: [
         {
@@ -20,4 +60,8 @@ angular.module 'frontend'
       transition: [ 'fade2', 'fade2', 'fade2', 'fade2' ]
       animation:'kenburns'
       timer:false
+
+
+
+
     return

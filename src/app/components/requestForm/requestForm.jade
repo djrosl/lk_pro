@@ -1,0 +1,152 @@
+.container-fluid.blue
+  .container.text-center
+    h1.h1
+      i(class="{{form.type.icon_class}}")
+      | {{form.type.title}}
+
+.container(ng-hide="!form.loaded")
+  .blocks
+    .block(ng-repeat="section in form.type.sections")
+      header.bg-primary
+        span.num {{section.order}}
+        span.header-content {{section.title}}
+      .content.clearfix
+        p.bg-success {{section.info}}
+
+        div(ng-repeat="base in section.databases" ng-class="{'col-md-6':!base.column_width, 'col-md-12':base.column_width}")
+          .block-item(ng-if="base.column_width")
+            .row
+              .col-md-7
+                .row
+                  .col-md-3.text-center
+                    img(ng-src="{{base.image}}", alt="")
+                  .col-md-9(ng-bind-html="base.content | html")
+                  .col-md-10
+                    .btn.btn-default.pull-left.justify-elements-container 
+                      span Выписка по юр. лицу 
+                      span 250P
+                    tooltip(id="{{base.id}}" content="form.tooltipContent")
+              .col-md-5
+                .row
+                  .col-md-3(ng-if="base.important")
+                    .bg-important.text-center ВАЖНО!
+                  .col-md-9(ng-bind-html="base.important | html")
+
+          .block-item(ng-if="!base.type && !base.column_width")
+            .row
+              .col-md-4(ng-if="base.image")
+                img(ng-src="{{base.image}}", alt="")
+              div(ng-class="{'col-md-8':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Без названия банков 
+                  span 250P
+                tooltip(id="{{base.id}}" content="form.tooltipContent")
+            .row.important-section(ng-if="base.important")
+              .col-md-3
+                .bg-important.text-center ВАЖНО!
+              .col-md-9(ng-bind-html="base.important | html")
+
+          .block-item.block-item-info(ng-if="base.type && !base.column_width")
+            .row
+              .col-md-3.text-center(ng-if="base.image")
+                img(ng-src="{{base.image}}", alt="")
+              div(ng-class="{'col-md-9':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
+            .row
+              .col-md-12
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span Заказать скоринг
+                  span 3000P
+                tooltip(id="{{base.id}}" content="form.tooltipContent")
+            .row.important-section(ng-if="base.important")
+              .col-md-3
+                .bg-important.text-center ВАЖНО!
+              .col-md-9(ng-bind-html="base.important | html")
+
+
+    
+    .block.personal-data(ng-if="slug == 'entity'")
+      header.bg-primary
+        span.num 2
+        span.header-content Юридическое лицо
+      .content.clearfix
+        p.bg-success Введите название юридического лица, ИНН или ОГРН
+        .col-md-12
+          form.form-inline(action="")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Название юр. лица")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="ИНН")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="ОГРН")
+
+    .block.personal-data
+      header.bg-primary
+        span.header-content Личные данные
+      .content.clearfix
+        p.bg-success Загрузите паспорт (страница с фотографией и пропиской) и введите свои данные
+        .col-md-12
+          header.with-border 
+            b Паспорт
+          span 
+            span.blue Внимание! 
+            | Без загрузки паспорта некоторые данные будут недоступны
+          .btn.btn-success.pull-right
+            i.fa.fa-arrow-circle-right
+            | Загрузить паспорт
+        .col-md-12.text-center
+          .img-wrp
+            i.fa.fa-times-circle
+            img(src="http://lorempixel.com/50/62/", alt="" class="img-thumbnail")
+          .img-wrp
+            i.fa.fa-times-circle
+            img(src="http://lorempixel.com/50/62/", alt="" class="img-thumbnail")
+        .col-md-12
+          form.form-inline(action="")
+            h4.col-md-12 Личные данные
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Фамилия")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Имя")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Отчество")
+            .col-md-12
+              input.form-control(type="text", name="", placeholder="Девичья фамилия")
+            .col-md-8
+              input.form-control(type="text", name="", placeholder="Место рождения")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="дд.мм.гггг")
+
+          form.form-inline(action="")
+            h4.col-md-12 Паспорт
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Серия")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="Номер")
+            .col-md-4
+              input.form-control(type="text", name="", placeholder="дд.мм.гггг")
+            .col-md-12
+              input.form-control(type="text", name="", placeholder="Кем выдан")
+
+          form.form-inline(action="")
+            h4.col-md-12 Регистрация
+            .col-md-6
+              input.form-control(type="text", name="", placeholder="Регион")
+            .col-md-6
+              input.form-control(type="text", name="", placeholder="Город")
+            .col-md-6
+              input.form-control(type="text", name="", placeholder="Улица")
+            .col-md-2
+              input.form-control(type="text", name="", placeholder="Дом")
+            .col-md-2
+              input.form-control(type="text", name="", placeholder="Корпус")
+            .col-md-2
+              input.form-control(type="text", name="", placeholder="Квартира")
+  .row.submit-row
+    .col-md-9.text-right.left
+      .sum-wrp
+        span Сумма заказа:
+        span.sum 5600P
+    .col-md-3.right
+      .btn.btn-success.btn-lg Заказать
