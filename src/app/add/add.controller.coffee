@@ -1,8 +1,8 @@
 angular.module 'frontend'
-  .controller 'AddController', ($timeout, $state, $rootScope, $stateParams, $http, $scope) ->
+  .controller 'AddController', ($timeout, $state, $rootScope, $stateParams, $http, $scope, activeLink) ->
     'ngInject'
     vm = this
-    vm.mainMenuActive = 'add'
+    activeLink.setLink 'add'
     
     $http.get 'http://lkpro.loc/database-type?fields=id,show_title,icon_class,slug'
     .success (data)->

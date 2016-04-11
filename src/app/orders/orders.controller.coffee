@@ -1,8 +1,8 @@
 angular.module 'frontend'
-  .controller 'OrdersController', ($timeout, $state, $rootScope, $http) ->
+  .controller 'OrdersController', ($timeout, $state, $rootScope, $http, activeLink) ->
     'ngInject'
     vm = this
-    vm.mainMenuActive = 'orders'
+    activeLink.setLink 'orders'
 
 
     $http.get('http://lkpro.loc/api/dashboard').success (data)->

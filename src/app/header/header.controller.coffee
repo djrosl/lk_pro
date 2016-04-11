@@ -1,7 +1,12 @@
 angular.module 'frontend'
-  .controller 'HeaderController', ($http, $sce) ->
+  .controller 'HeaderController', ($http, $sce, activeLink, $scope) ->
     'ngInject'
     vm = this
+
+    $scope.$watch ->
+      activeLink.getLink()
+    , (nVal, oVal)->
+      vm.activeLink = nVal if nVal isnt oVal
 
     vm.columns = []
     $http.get('http://lkpro.loc/header/')

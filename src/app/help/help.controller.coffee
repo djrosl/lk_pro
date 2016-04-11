@@ -1,7 +1,7 @@
 angular.module 'frontend'
-  .controller 'HelpController', ($timeout, $state, $rootScope, $stateParams) ->
+  .controller 'HelpController', ($timeout, $state, $rootScope, $stateParams, activeLink) ->
     'ngInject'
     vm = this
-    vm.mainMenuActive = 'help'
+    activeLink.setLink 'help'
 
     return

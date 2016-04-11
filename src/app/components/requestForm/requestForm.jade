@@ -13,52 +13,53 @@
       .content.clearfix
         p.bg-success {{section.info}}
 
-        div(ng-repeat="base in section.databases" ng-class="{'col-md-6':!base.column_width, 'col-md-12':base.column_width}")
-          .block-item(ng-if="base.column_width")
+        div(ng-repeat="base in section.databases" ng-class="{'col-md-6':base.column_width == 0, 'col-md-12':base.column_width == 1}")
+          .block-item(ng-if="base.column_width == 1")
             .row
               .col-md-7
                 .row
                   .col-md-3.text-center
-                    img(ng-src="{{base.image}}", alt="")
+                    img(ng-src="{{base.image | imageFilter}}", alt="")
                   .col-md-9(ng-bind-html="base.content | html")
-                  .col-md-10
+                  .col-md-10(ng-repeat="button in base.buttons")
                     .btn.btn-default.pull-left.justify-elements-container 
-                      span Выписка по юр. лицу 
-                      span 250P
-                    tooltip(id="{{base.id}}" content="form.tooltipContent")
+                      span {{button.title}} 
+                      span {{button.price}}P
+                    tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
               .col-md-5
                 .row
                   .col-md-3(ng-if="base.important")
                     .bg-important.text-center ВАЖНО!
                   .col-md-9(ng-bind-html="base.important | html")
 
-          .block-item(ng-if="!base.type && !base.column_width")
+          .block-item(ng-if="base.type == 0 && base.column_width == 0")
             .row
               .col-md-4(ng-if="base.image")
-                img(ng-src="{{base.image}}", alt="")
+                img(ng-src="{{base.image | imageFilter}}", alt="")
               div(ng-class="{'col-md-8':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
             .row
-              .col-md-12
+              .col-md-12(ng-repeat="button in base.buttons")
                 .btn.btn-default.pull-left.justify-elements-container 
-                  span Без названия банков 
-                  span 250P
-                tooltip(id="{{base.id}}" content="form.tooltipContent")
+                  span {{button.title}} 
+                  span {{button.price}}P
+                tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
             .row.important-section(ng-if="base.important")
               .col-md-3
                 .bg-important.text-center ВАЖНО!
               .col-md-9(ng-bind-html="base.important | html")
 
-          .block-item.block-item-info(ng-if="base.type && !base.column_width")
+          .block-item.block-item-info(ng-if="base.type == 1 && base.column_width == 0")
             .row
               .col-md-3.text-center(ng-if="base.image")
-                img(ng-src="{{base.image}}", alt="")
+                img(ng-src="{{base.image | imageFilter}}", alt="")
               div(ng-class="{'col-md-9':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
             .row
               .col-md-12
-                .btn.btn-default.pull-left.justify-elements-container 
-                  span Заказать скоринг
-                  span 3000P
-                tooltip(id="{{base.id}}" content="form.tooltipContent")
+                .col-md-10(ng-repeat="button in base.buttons")
+                  .btn.btn-default.pull-left.justify-elements-container 
+                    span {{button.title}} 
+                    span {{button.price}}P
+                  tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
             .row.important-section(ng-if="base.important")
               .col-md-3
                 .bg-important.text-center ВАЖНО!

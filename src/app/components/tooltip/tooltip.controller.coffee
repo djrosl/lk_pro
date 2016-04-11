@@ -8,10 +8,12 @@ angular.module 'frontend'
 
     $timeout ()->
       if $element.offset().left > window.innerWidth/2
+        console.log 1
         vm.classLeft = 1
       else
+        console.log 0
         vm.classLeft = 0
       console.log $element.offset().left, window.innerWidth/2
-    ,0,false
+    ,1500,true
     
     return

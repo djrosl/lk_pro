@@ -6,13 +6,13 @@ header.main
           img(src="assets/images/dash-logo.png")
       .col-md-6
         nav
-          a(ui-sref="add" ng-class="{active: add.mainMenuActive == 'add'}")
+          a(ui-sref="add" ng-class="{active: header.activeLink == 'add'}")
             i.fa.fa-plus
             | Новый заказ
-          a(ui-sref="orders.current" ng-class="{active: orders.mainMenuActive == 'orders'}")
+          a(ui-sref="orders.current" ng-class="{active: header.activeLink == 'orders'}")
             i.fa.fa-list
             | Мои заказы
-          a(ui-sref="help" ng-class="{active: help.mainMenuActive == 'help'}")
+          a(ui-sref="help" ng-class="{active: header.activeLink == 'help'}")
             i.fa.fa-question-circle
             | Помощь
       .col-md-3.text-right

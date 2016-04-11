@@ -19,12 +19,9 @@ angular.module 'frontend'
       if newVal? and newVal isnt oldVal
         vm.type = {}
         vm.loaded = 0
-        $http.get 'http://lkpro.loc/database-type/search?slug='+$scope.slug+'&expand=sections,databases'
+        $http.get 'http://lkpro.loc/database-type/search?slug='+$scope.slug+'&expand=sections,databases,buttons'
           .success (data)->
             vm.type = data
-            angular.forEach data.sections, (v,k)->
-              vm.type.sections[k].databases = data.databases[v.id]
-            delete vm.type.databases
             vm.type.icon_class = 'fa fa-'+data.icon_class
             $timeout ()->
               vm.loaded = 1
