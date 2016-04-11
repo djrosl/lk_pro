@@ -1,2 +1,2 @@
 angular.module('frontend')
-    .constant 'apiroot', 'http://lkpro.loc'
+    .constant 'apiroot', 'http://api.lkpro.acrux.tk'
