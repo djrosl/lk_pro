@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'RequestFormController', ($scope, $http, $timeout) ->
+  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot) ->
     'ngInject'
     vm = this
     
@@ -19,7 +19,7 @@ angular.module 'frontend'
       if newVal? and newVal isnt oldVal
         vm.type = {}
         vm.loaded = 0
-        $http.get 'http://lkpro.loc/database-type/search?slug='+$scope.slug+'&expand=sections,databases,buttons'
+        $http.get apiroot+'/database-type/search?slug='+$scope.slug+'&expand=sections,databases,buttons'
           .success (data)->
             vm.type = data
             vm.type.icon_class = 'fa fa-'+data.icon_class

@@ -1,9 +1,9 @@
 angular.module 'frontend'
-  .controller 'AddEntityController', ($scope, $http) ->
+  .controller 'AddEntityController', ($scope, $http, apiroot) ->
     'ngInject'
     vm = this
 
-    $http.get 'http://lkpro.loc/database-types/2'
+    $http.get apiroot+'/database-types/2'
     .success (data)->
       vm.header = data.show_title
       vm.icon_class = "fa fa-"+data.icon_class

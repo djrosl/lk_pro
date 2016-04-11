@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'HeaderController', ($http, $sce, activeLink, $scope) ->
+  .controller 'HeaderController', ($http, $sce, activeLink, $scope, apiroot) ->
     'ngInject'
     vm = this
 
@@ -9,7 +9,7 @@ angular.module 'frontend'
       vm.activeLink = nVal if nVal isnt oVal
 
     vm.columns = []
-    $http.get('http://lkpro.loc/header/')
+    $http.get(apiroot+'/header/')
     .success (data)->
       vm.columns = [
         $sce.trustAsHtml(data[0].column_1),

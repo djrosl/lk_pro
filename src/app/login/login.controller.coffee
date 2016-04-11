@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'LoginController', ($timeout, $http, $window, $state) ->
+  .controller 'LoginController', ($timeout, $http, $window, $state, apiroot) ->
     'ngInject'
     vm = this
 
@@ -11,7 +11,7 @@ angular.module 'frontend'
       vm.error = {}
       console.log vm.userModel
       req =
-        url: 'http://lkpro.loc/api/login'
+        url: apiroot+'/api/login'
         data: vm.userModel
         method: 'post'
       $http(req)
@@ -27,7 +27,7 @@ angular.module 'frontend'
       vm.registerError = {}
       console.log vm.registerModel
       req =
-        url: 'http://lkpro.loc/api/register'
+        url: apiroot+'/api/register'
         data: vm.registerModel
         method: 'post'
       $http(req)
