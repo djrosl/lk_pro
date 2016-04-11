@@ -1,4 +1,4 @@
 angular.module 'frontend'
   .filter 'imageFilter', ->
     (val)->
-      'http://admin.lkpro.loc'+val
+      'http://admin.lkpro.acrux.tk'+val
