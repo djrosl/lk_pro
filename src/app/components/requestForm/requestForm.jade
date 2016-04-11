@@ -54,12 +54,11 @@
                 img(ng-src="{{base.image | imageFilter}}", alt="")
               div(ng-class="{'col-md-9':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
             .row
-              .col-md-12
-                .col-md-10(ng-repeat="button in base.buttons")
-                  .btn.btn-default.pull-left.justify-elements-container 
-                    span {{button.title}} 
-                    span {{button.price}}P
-                  tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
+              .col-md-12(ng-repeat="button in base.buttons")
+                .btn.btn-default.pull-left.justify-elements-container 
+                  span {{button.title}} 
+                  span {{button.price}}P
+                tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
             .row.important-section(ng-if="base.important")
               .col-md-3
                 .bg-important.text-center ВАЖНО!
