@@ -22,7 +22,7 @@
                     img(ng-src="{{base.image | imageFilter}}", alt="")
                   .col-md-9(ng-bind-html="base.content | html")
                   .col-md-10(ng-repeat="button in base.buttons")
-                    .btn.btn-default.pull-left.justify-elements-container 
+                    .btn.btn-default.pull-left.justify-elements-container(ng-click="form.countToggle(button)" ng-class="{'active':form.counted(button)}") 
                       span {{button.title}} 
                       span {{button.price}}P
                     tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
@@ -39,7 +39,7 @@
               div(ng-class="{'col-md-8':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
             .row
               .col-md-12(ng-repeat="button in base.buttons")
-                .btn.btn-default.pull-left.justify-elements-container 
+                .btn.btn-default.pull-left.justify-elements-container(ng-click="form.countToggle(button)" ng-class="{'active':form.counted(button)}") 
                   span {{button.title}} 
                   span {{button.price}}P
                 tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
@@ -55,7 +55,7 @@
               div(ng-class="{'col-md-9':base.image, 'col-md-12': !base.image}" ng-bind-html="base.content | html")
             .row
               .col-md-12(ng-repeat="button in base.buttons")
-                .btn.btn-default.pull-left.justify-elements-container 
+                .btn.btn-default.pull-left.justify-elements-container(ng-click="form.countToggle(button)" ng-class="{'active':form.counted(button)}") 
                   span {{button.title}} 
                   span {{button.price}}P
                 tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
@@ -92,61 +92,81 @@
           span 
             span.blue Внимание! 
             | Без загрузки паспорта некоторые данные будут недоступны
-          .btn.btn-success.pull-right
+          label.btn.btn-success.pull-right(for="file")
             i.fa.fa-arrow-circle-right
             | Загрузить паспорт
+          input#file(class="hidden" nv-file-select="", uploader="uploader", multiple, type="file")
         .col-md-12.text-center
-          .img-wrp
-            i.fa.fa-times-circle
-            img(src="http://lorempixel.com/50/62/", alt="" class="img-thumbnail")
-          .img-wrp
-            i.fa.fa-times-circle
-            img(src="http://lorempixel.com/50/62/", alt="" class="img-thumbnail")
+          
+          .img-wrp(ng-repeat="item in form.passport.images")
+            //- i.fa.fa-times-circle(ng-click="item.remove()")
+            img(ng-src="{{item | imageFilter}}" class="img-thumbnail")
+
+          .img-wrp(ng-repeat="item in uploader.queue")
+            i.fa.fa-times-circle(ng-click="item.remove()")
+            div(ng-thumb="{ file: item._file, height: 100 }" class="img-thumbnail")
+
         .col-md-12
           form.form-inline(action="")
             h4.col-md-12 Личные данные
             .col-md-4
-              input.form-control(type="text", name="", placeholder="Фамилия")
+              .error {{form.formErrors.own_lastname.message}}
+              input.form-control(type="text", name="", placeholder="Фамилия", ng-model="form.passport.own_lastname", required)
             .col-md-4
-              input.form-control(type="text", name="", placeholder="Имя")
+              .error {{form.formErrors.own_firstname.message}}
+              input.form-control(type="text", name="", placeholder="Имя", ng-model="form.passport.own_firstname", required)
             .col-md-4
-              input.form-control(type="text", name="", placeholder="Отчество")
+              .error {{form.formErrors.own_fathername.message}}
+              input.form-control(type="text", name="", placeholder="Отчество", ng-model="form.passport.own_fathername", required)
             .col-md-12
-              input.form-control(type="text", name="", placeholder="Девичья фамилия")
+              .error {{form.formErrors.passport.message}}
+              input.form-control(type="text", name="", placeholder="Девичья фамилия", ng-model="form.passport.own_maidenname")
             .col-md-8
-              input.form-control(type="text", name="", placeholder="Место рождения")
+              .error {{form.formErrors.own_birthplace.message}}
+              input.form-control(type="text", name="", placeholder="Место рождения", ng-model="form.passport.own_birthplace", required)
             .col-md-4
-              input.form-control(type="text", name="", placeholder="дд.мм.гггг")
+              .error {{form.formErrors.own_birthdate.message}}
+              input.form-control(type="date", name="", placeholder="дд.мм.гггг", ng-model="form.passport.own_birthdate", required)
 
           form.form-inline(action="")
             h4.col-md-12 Паспорт
             .col-md-4
-              input.form-control(type="text", name="", placeholder="Серия")
+              .error {{form.formErrors.pass_seria.message}}
+              input.form-control(type="text", name="", placeholder="Серия", ng-model="form.passport.pass_seria", required)
             .col-md-4
-              input.form-control(type="text", name="", placeholder="Номер")
+              .error {{form.formErrors.pass_num.message}}
+              input.form-control(type="text", name="", placeholder="Номер", ng-model="form.passport.pass_num", required)
             .col-md-4
-              input.form-control(type="text", name="", placeholder="дд.мм.гггг")
+              .error {{form.formErrors.pass_get.message}}
+              input.form-control(type="date", name="", placeholder="дд.мм.гггг", ng-model="form.passport.pass_get", required)
             .col-md-12
-              input.form-control(type="text", name="", placeholder="Кем выдан")
+              .error {{form.formErrors.pass_by.message}}
+              input.form-control(type="text", name="", placeholder="Кем выдан", ng-model="form.passport.pass_by", required)
 
           form.form-inline(action="")
             h4.col-md-12 Регистрация
             .col-md-6
-              input.form-control(type="text", name="", placeholder="Регион")
+              .error {{form.formErrors.reg_region.message}}
+              input.form-control(type="text", name="", placeholder="Регион", ng-model="form.passport.reg_region", required)
             .col-md-6
-              input.form-control(type="text", name="", placeholder="Город")
+              .error {{form.formErrors.reg_city.message}}
+              input.form-control(type="text", name="", placeholder="Город", ng-model="form.passport.reg_city", required)
             .col-md-6
-              input.form-control(type="text", name="", placeholder="Улица")
+              .error {{form.formErrors.reg_street.message}}
+              input.form-control(type="text", name="", placeholder="Улица", ng-model="form.passport.reg_street", required)
             .col-md-2
-              input.form-control(type="text", name="", placeholder="Дом")
+              .error {{form.formErrors.reg_house.message}}
+              input.form-control(type="text", name="", placeholder="Дом", ng-model="form.passport.reg_house", required)
             .col-md-2
-              input.form-control(type="text", name="", placeholder="Корпус")
+              .error {{form.formErrors.reg_housing.message}}
+              input.form-control(type="text", name="", placeholder="Корпус", ng-model="form.passport.reg_housing")
             .col-md-2
-              input.form-control(type="text", name="", placeholder="Квартира")
+              .error {{form.formErrors.reg_flat.message}}
+              input.form-control(type="text", name="", placeholder="Квартира", ng-model="form.passport.reg_flat", required)
   .row.submit-row
     .col-md-9.text-right.left
       .sum-wrp
         span Сумма заказа:
-        span.sum 5600P
+        span.sum {{form.orderCost}}P
     .col-md-3.right
-      .btn.btn-success.btn-lg Заказать
+      .btn.btn-success.btn-lg(ng-click="form.submitForm()") Заказать

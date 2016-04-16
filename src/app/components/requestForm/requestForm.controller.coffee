@@ -1,24 +1,48 @@
 angular.module 'frontend'
-  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot) ->
+  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window) ->
     'ngInject'
     vm = this
-    
-    vm.tooltipContent =
-      time: "<p>Срок - <b>2 рабочих дня</b></p><p>Заявка обрабатывается с пн по пт по рабочим дням</p>"
-      example: "<div class='text-center'><a href=''>Пример отчета</a></div>"
-      help: "Что такое «проверка до негатива»
-      Это уникальная функция нашего сервиса, которая экономит время и деньги.
-      Если у брокера проходит большой поток клиентов, ему важны не подробности кредитной истории каждого заемщика,
-      а сама возможность выдачи кредита.
-      В таком случае заказывать все отчеты на каждого человека может быть чересчур затратно.
-      Для этого мы ввели функцию проверки до первого негатива.
-      Она начинается с баз, в которых есть наибольший шанс встретить негатив,
-      и останавливается при обнаружении первого негативного фактора."
-    
+
+    vm.passport = {}
+    $http.get(apiroot+'/api/dashboard')
+    .error (e)->
+      console.log e
+    .success (s)->
+      s.passport.own_birthdate = new Date(s.passport.own_birthdate)
+      s.passport.pass_get = new Date(s.passport.pass_get)
+      vm.passport = s.passport
+
+    submitOrder = ->
+      return true
+
+    vm.submitForm = ->
+      #submitPass()
+      submitOrder()
+
+
+    vm.orderCost = 0
+    vm.order = []
+    vm.counted = (obj)->
+      $filter('filter')(vm.order, obj).length
+
+    vm.countToggle = (obj)->
+      if !vm.counted obj
+        vm.order.push obj
+        vm.orderCost+=(+obj.price)
+      else
+        index = _.findIndex(vm.order, obj)
+        vm.order.splice index, 1
+        vm.orderCost-=obj.price
+
+    uploader = $scope.uploader = new FileUploader
+      url: apiroot+'/api/add-passport-photo'
+      alias: 'images'
+      headers:
+        Authorization: 'Bearer ' + $window.sessionStorage.access_token
     $scope.$watch 'slug', (newVal, oldVal)->
       if newVal? and newVal isnt oldVal
         vm.type = {}
-        vm.loaded = 0
+        vm.loaded = vm.orderCost = 0
         $http.get apiroot+'/database-type/search?slug='+$scope.slug+'&expand=sections,databases,buttons'
           .success (data)->
             vm.type = data
@@ -26,5 +50,26 @@ angular.module 'frontend'
             $timeout ()->
               vm.loaded = 1
             ,200,false
+
+    submitPass = ->
+      if vm.passport
+        vm.formErrors = []
+        $http.get(apiroot+'/api/dashboard')
+        .error (e)->
+          console.log e
+        .success (s)->
+          vm.passport.user_id = s.id
+          req =
+            method: 'POST'
+            data: vm.passport
+            url: apiroot+'/api/add-passport'
+          $http(req)
+          .success (s)->
+            console.log s
+            uploader.uploadAll()
+          .error (e)->
+            console.log e
+            vm.formErrors = _.indexBy e, 'field'
+      else return true
 
     return

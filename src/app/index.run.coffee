@@ -6,7 +6,7 @@ angular.module 'frontend'
     $rootScope.$on 'loading:finish', ->
       $timeout ->
         $rootScope.loaded = true
-      ,1000
+      ,100
     
     $rootScope.$on '$stateChangeSuccess', (event, toState, params)->
       if toState.controllerAs is 'orders'
