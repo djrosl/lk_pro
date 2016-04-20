@@ -21,114 +21,34 @@
           th Сумма
           th Опции
       tbody
-        tr 
+        tr(ng-repeat="order in data")
           td 
-            a(href="") 20240
+            a(href="") {{order.id}}
           td 
-            b Сиялов
-            br
-            | Евгений Владимирович
+            {{order.title}}
           td 
-            span.green НБКИ без банков
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span
-              strike Идентификация
-            span.green Идентификация
-          td 2000P
-          td
+            span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-repeat="button in order.orderbuttons" ng-click="openDoc(button.file)") {{button.button.title}}
+            //- span
+            //-   strike Идентификация
+          td {{order.cost}}P
+          td(ng-if="type == 'current'")
             button.btn.btn-option 
               i.fa.fa-plus-circle
               | Дозаказать проверку
             br
-            button.btn.btn-option 
+            button.btn.btn-option(ng-click="changeStatus(order, 4)")
               i.fa.fa-archive
               | Переместить в архив
             br
-            button.btn.btn-option 
+            button.btn.btn-option(ng-click="changeStatus(order, 0)")
               i.fa.fa-ban
               | Отменить заказ
-        tr 
-          td 
-            a(href="") 20240
-          td 
-            b Сиялов
-            br
-            | Евгений Владимирович
-          td 
-            span.green НБКИ без банков
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span
-              strike Идентификация
-            span.green Идентификация
-          td 2000P
-          td
-            button.btn.btn-option 
+          td(ng-if="type == 'archive'")
+            button.btn.btn-option(ng-click="changeStatus(order, 1)") 
               i.fa.fa-undo
               | Вернуть
-        tr 
-          td 
-            a(href="") 20240
-          td 
-            b Сиялов
-            br
-            | Евгений Владимирович
-          td 
-            span.green НБКИ без банков
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span
-              strike Идентификация
-            span.green Идентификация
-          td 2000P
-          td
-            button.btn.btn-option 
-              i.fa.fa-plus-circle
-              | Дозаказать проверку
-            br
-            button.btn.btn-option 
-              i.fa.fa-archive
-              | Переместить в архив
-            br
-            button.btn.btn-option 
-              i.fa.fa-ban
-              | Отменить заказ
-        tr 
-          td 
-            a(href="") 20240
-          td 
-            b Сиялов
-            br
-            | Евгений Владимирович
-          td 
-            span.green НБКИ без банков
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span.red ОКБ
-            span.orange ФССП+Суд
-            span Русский Стандарт
-            span
-              strike Идентификация
-            span.green Идентификация
-          td 2000P
-          td
-            button.btn.btn-option 
-              i.fa.fa-undo
-              | Вернуть
+
+
   .pagination.bottom
     a.btn.btn-left
     a.btn.btn-primary(href="") 1

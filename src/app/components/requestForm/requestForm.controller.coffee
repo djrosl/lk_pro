@@ -13,7 +13,20 @@ angular.module 'frontend'
       vm.passport = s.passport
 
     submitOrder = ->
-      return true
+      data =
+        sub: vm.subfields
+        order: vm.order
+        cost: vm.orderCost
+        base_type: vm.base_type
+        name: vm.orderName
+      $http.post apiroot+'/api/order', data
+      .error (e)->
+        console.log e
+      .success (s)->
+        console.log s
+
+    vm.explode = (del, arr)->
+      arr.split(del)
 
     vm.submitForm = ->
       #submitPass()
@@ -22,15 +35,16 @@ angular.module 'frontend'
 
     vm.orderCost = 0
     vm.order = []
+    vm.subfields = {}
     vm.counted = (obj)->
-      $filter('filter')(vm.order, obj).length
+      _.findIndex(vm.order, obj)
 
     vm.countToggle = (obj)->
-      if !vm.counted obj
+      index = vm.counted obj
+      if index < 0
         vm.order.push obj
         vm.orderCost+=(+obj.price)
       else
-        index = _.findIndex(vm.order, obj)
         vm.order.splice index, 1
         vm.orderCost-=obj.price
 
@@ -47,6 +61,7 @@ angular.module 'frontend'
           .success (data)->
             vm.type = data
             vm.type.icon_class = 'fa fa-'+data.icon_class
+            vm.base_type = data.id
             $timeout ()->
               vm.loaded = 1
             ,200,false
