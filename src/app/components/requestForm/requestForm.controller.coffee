@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window) ->
+  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window, $state) ->
     'ngInject'
     vm = this
 
@@ -17,6 +17,7 @@ angular.module 'frontend'
         console.log e
       .success (s)->
         console.log s
+        $state.go 'orders.current'
 
     vm.explode = (del, arr)->
       arr.split(del)
