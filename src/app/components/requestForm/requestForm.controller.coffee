@@ -4,13 +4,6 @@ angular.module 'frontend'
     vm = this
 
     vm.passport = {}
-    $http.get(apiroot+'/api/dashboard')
-    .error (e)->
-      console.log e
-    .success (s)->
-      s.passport.own_birthdate = new Date(s.passport.own_birthdate)
-      s.passport.pass_get = new Date(s.passport.pass_get)
-      vm.passport = s.passport
 
     submitOrder = ->
       data =
