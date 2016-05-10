@@ -48,3 +48,39 @@ header.main
     a
       color: rgb(64, 169, 83);
       font-weight: 600;
+  .tool-wrapper
+    position relative
+    display inline-block
+    padding-right 10px
+    cursor pointer
+    &.active
+      span
+        color: #fff
+      background #000
+      button
+        background #049cdb
+        background-color #049cdb
+        color: #fff
+        
+  .popup-tool
+    background #fff
+    box-shadow 0 3px 7px rgba(0,0,0,.5)
+    position absolute
+    width 100%
+    left 0
+    top 100%
+    border-radius 0 0 3px 3px
+    z-index 2
+    padding 5px 0
+    a
+      display block
+      width 100%
+      padding 5px 10px 5px 40px
+      text-align left
+      color #000
+      &.balance
+        background url(/assets/images/purse-blue.png) 10px center no-repeat
+      &.settings
+        background url(/assets/images/settings-blue.png) 10px center no-repeat
+      &.exit
+        background url(/assets/images/exit-blue.png) 10px center no-repeat

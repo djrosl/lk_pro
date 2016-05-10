@@ -16,8 +16,14 @@ header.main
             i.fa.fa-question-circle
             | Помощь
       .col-md-3.text-right
-        button.btn.btn-cash 3000Р
-        span.user-nickname credit-service
+        .tool-wrapper(ng-click="header.showPopup = 1" ng-class="{active: header.showPopup}")
+          button.btn.btn-cash {{header.balance | currency:''}} ₽
+          span.user-nickname {{header.user.username}}
+          .popup-tool(ng-show="header.showPopup" click-outside="header.showPopup = 0")
+            a.balance(ui-sref="payment") Пополнить баланс
+            a.settings(ui-sref="settings") Настройки
+            a.exit(href="" ng-click="header.logout()") Выход
+
     .row.header-middle
       .col-md-4(ng-repeat="column in header.columns")
         .info-box.text-center(ng-bind-html="column")

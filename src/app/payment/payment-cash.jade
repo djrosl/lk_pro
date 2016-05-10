@@ -21,22 +21,21 @@
         form.form
           .form-group
             label(for="inp1") Сумма *
-            input#inp1.form-control(type="text")
+            input#inp1.form-control(type="text" ng-model="cash.form.summ" required)
           .form-group
             label(for="inp2") Дата *
-            input#inp2.form-control(type="text")
+            input#inp2(type="datetime-local" ng-model="cash.form.date" required).form-control
           .form-group
             label(for="inp3") Способ оплаты *
-            select#inp3.form-control
-              option(value="") option
-              option(value="") option
-              option(value="") option
+            select#inp3.form-control(ng-model="cash.form.cash_type")
+              option(value="0") Яндекс.Деньги
+              option(value="1") QIWI
           .form-group
             label(for="inp4") Фото чека *
             br
             label.styled-file(for="inp4") Выберите файл
-            input#inp4(type="file", name="")
+            input#inp4(type="file", name="" required  nv-file-select="" uploader="cash.uploader")
         
       .text-center
-        button.btn.btn-success.btn-lg Оплатить
+        button.btn.btn-success.btn-lg(ng-click="cash.processForm()" ng-hide="cash.processFormHide") Оплатить
       p.fs16 Или свяжитесь с нами и сообщите свой логин, сумму и время платежа. Мы проверим данные и зачислим сумму на ваш счет.

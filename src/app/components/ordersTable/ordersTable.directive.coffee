@@ -12,11 +12,29 @@ angular.module 'frontend'
             window.open apiroot+'/api/file?path='+filename
           else return false
           return true
+
+        scope.pagination =
+          current: 0
+          per: 10
+
+        scope.pagination.to = (index)->
+          scope.pagination.current = index
+        scope.pagination.next = ->
+          return false if parseInt(scope.pagination.current)+1 > (scope.pagination.pages-1)
+          scope.pagination.current = parseInt(scope.pagination.current)+1
+        scope.pagination.prev = ->
+          return false if scope.pagination.current-1 < 0
+          scope.pagination.current = parseInt(scope.pagination.current)-1
+        scope.$watch 'data', (newVal)->
+          if newVal
+            scope.pagination.pages = Math.ceil(newVal.length/scope.pagination.per)
+
         scope.changeStatus = (order, status)->
           $http.post(apiroot+'/api/change-order-status', {id: order.id, status: status})
           .success (s)->
             console.log s
             ind = _.findIndex scope.data, order
             scope.data.splice ind, 1
+            scope.pagination.pages = Math.ceil(scope.data.length/scope.pagination.per)
           return true
     }

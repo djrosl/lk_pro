@@ -8,3 +8,12 @@ angular.module 'frontend'
         link = newLink
         return
     }
+  .factory 'balance', ->
+    balance = ''
+    {
+      getBalance: ->
+        balance
+      setBalance: (newBalance) ->
+        balance = newBalance
+        return
+    }

@@ -3,4 +3,6 @@ angular.module 'frontend'
     'ngInject'
     vm = this
 
+    vm.form = {}
+
     return

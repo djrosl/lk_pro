@@ -1,11 +1,28 @@
 angular.module 'frontend'
-  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window, $state) ->
+  .controller 'RequestFormController', ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window, $state, balance) ->
     'ngInject'
     vm = this
 
     vm.passport = {}
 
+    $scope.$watch ->
+      vm.orderCost
+    , (newVal, oldVal)->
+      if newVal > balance.getBalance()
+        vm.showWarning = true
+      else vm.showWarning = false
+
+
     submitOrder = ->
+      if vm.showWarning
+        alert 'На вашем счету недостаточно средств!'
+        return false
+      if !vm.order
+        alert 'Выберите базы для проверки'
+        return false
+      if !vm.orderName
+        alert 'Введите название заказа'
+        return false
       data =
         sub: vm.subfields
         order: vm.order
@@ -17,6 +34,7 @@ angular.module 'frontend'
         console.log e
       .success (s)->
         console.log s
+        balance.setBalance s
         $state.go 'orders.current'
 
     vm.explode = (del, arr)->

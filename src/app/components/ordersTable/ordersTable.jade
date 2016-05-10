@@ -1,17 +1,9 @@
 .container.table-container
-  .pagination.top
-    a.btn.btn-left
-    a.btn.btn-primary(href="") 1
-    a.btn.btn-default(href="") 2
-    a.btn.btn-default(href="") 3
-    a.btn.btn-default(href="") 4
-    a.btn.btn-default(href="") 5
-    a.btn.btn-default(href="") 6
-    a.btn.btn-default(href="") 7
-    a.btn.btn-default(href="") 8
-    a.btn.btn-default(href="") 9
-    a.btn.btn-right
-  .table-responsive
+  .pagination.top(ng-show="pagination.pages")
+    a.btn.btn-left(ng-click="pagination.prev()")
+    a.btn(href="" ng-click="pagination.to(i)" ng-repeat="i in [] | range:pagination.pages" ng-class="{'btn-primary': pagination.current == i, 'btn-default': pagination.current != i}") {{i+1}}
+    a.btn.btn-right(ng-click="pagination.next()")
+  .table-responsive(ng-show="pagination.pages")
     table.table.table-striped
       thead
         tr
@@ -21,11 +13,10 @@
           th Сумма
           th Опции
       tbody
-        tr(ng-repeat="order in data")
+        tr(ng-repeat="order in data | orderBy:'-id' | pagination:pagination.per:pagination.current")
           td 
             a(href="") {{order.id}}
-          td 
-            {{order.title}}
+          td {{order.title}}
           td 
             span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-repeat="button in order.orderbuttons" ng-click="openDoc(button.file)") {{button.button.title}}
             //- span
@@ -49,15 +40,7 @@
               | Вернуть
 
 
-  .pagination.bottom
-    a.btn.btn-left
-    a.btn.btn-primary(href="") 1
-    a.btn.btn-default(href="") 2
-    a.btn.btn-default(href="") 3
-    a.btn.btn-default(href="") 4
-    a.btn.btn-default(href="") 5
-    a.btn.btn-default(href="") 6
-    a.btn.btn-default(href="") 7
-    a.btn.btn-default(href="") 8
-    a.btn.btn-default(href="") 9
-    a.btn.btn-right
+  .pagination.bottom(ng-show="pagination.pages")
+    a.btn.btn-left(ng-click="pagination.prev()")
+    a.btn(href="" ng-click="pagination.to(i)" ng-repeat="i in [] | range:pagination.pages" ng-class="{'btn-primary': pagination.current == i, 'btn-default': pagination.current != i}") {{i+1}}
+    a.btn.btn-right(ng-click="pagination.next()")

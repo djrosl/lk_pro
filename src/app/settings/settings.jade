@@ -15,21 +15,18 @@
             form.form
               .form-group
                 label(for="inp1") Имя пользователя
-                input#inp1.form-control(type="text")
+                input#inp1.form-control(type="text" ng-model="settings.data.username")
               .form-group
                 label(for="inp2") Новый пароль
-                input#inp2.form-control(type="text")
-              .form-group
-                label(for="inp3") Подтвердите пароль
-                input#inp3.form-control(type="text")
+                input#inp2.form-control(type="text" ng-model="settings.data.password")
               .form-group
                 label(for="inp4") E-mail
-                input#inp4.form-control(type="text")
+                input#inp4.form-control(type="text" ng-model="settings.data.email")
               .form-group
                 label(for="inp5") ICQ
-                input#inp5.form-control(type="text")
+                input#inp5.form-control(type="text" ng-model="settings.data.icq")
               .form-group
                 label(for="inp6") Jabber
-                input#inp6.form-control(type="text")
+                input#inp6.form-control(type="text" ng-model="settings.data.jabber")
               .form-group
-                button.btn.btn-lg.btn-success Обновить данные
+                button.btn.btn-lg.btn-success(ng-click="settings.processForm()") Обновить данные

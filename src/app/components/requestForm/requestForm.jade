@@ -1,3 +1,7 @@
+p.bg-danger.fixed-bottom(ng-show="form.showWarning")
+  |На Вашем счету недостаточно средств! Для начала 
+  a(ui-sref="payment") пополните счет
+
 .container-fluid.blue
   .container.text-center
     h1.h1
@@ -81,7 +85,7 @@
     //-         .col-md-4
     //-           input.form-control(type="text", name="", placeholder="ОГРН")
 
-    .block.personal-data(ng-show="form.itemsSorted.length")
+    .block.personal-data
       header.bg-primary
         span.header-content Поля, необходимые для проверки
       .content.clearfix
