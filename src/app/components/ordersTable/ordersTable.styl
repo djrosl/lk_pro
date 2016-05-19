@@ -53,10 +53,14 @@
       &:nth-child(4)
         font-size 16px
       span
-        &:hover:after
+        &:hover:after,
+        &:hover .tooltip
           opacity 1
           visibility visible
         &:after
+          content: 'Заказ в очереди'
+        &:after,
+        .tooltip
           position: absolute;
           bottom: 120%;
           display: block;
@@ -89,13 +93,16 @@
         &.red
           background-color: rgb(204, 0, 0)
           &:after
-            content: 'Отклонено'
+            display none
         &.green
           background-color: rgb(51, 153, 0)
           cursor pointer
           &:after
-            content: 'Нажмите для получения файла'
+            content: 'Заказ выполнен'
         &.orange
           background-color: rgb(255, 153, 0)
           &:after
-            content: 'В работе'
+            content: 'Заказ в работе'
+th:last-child
+    max-width: 200px
+    width: 100px

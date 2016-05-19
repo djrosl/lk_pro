@@ -1,14 +1,10 @@
-p.bg-danger.fixed-bottom(ng-show="form.showWarning")
-  |На Вашем счету недостаточно средств! Для начала 
-  a(ui-sref="payment") пополните счет
-
 .container-fluid.blue
   .container.text-center
     h1.h1
       i(class="{{form.type.icon_class}}")
       | {{form.type.title}}
 
-.container(ng-hide="!form.loaded")
+form.container(ng-hide="!form.loaded")
   .blocks
     .block(ng-repeat="section in form.type.sections")
       header.bg-primary
@@ -17,26 +13,8 @@ p.bg-danger.fixed-bottom(ng-show="form.showWarning")
       .content.clearfix
         p.bg-success {{section.info}}
 
-        div(ng-repeat="base in section.databases" ng-class="{'col-md-6':base.column_width == 0, 'col-md-12':base.column_width == 1}")
-          .block-item(ng-if="base.column_width == 1")
-            .row
-              .col-md-7
-                .row
-                  .col-md-3.text-center
-                    img(ng-src="{{base.image | imageFilter}}", alt="")
-                  .col-md-9(ng-bind-html="base.content | html")
-                  .col-md-10(ng-repeat="button in base.buttons")
-                    .btn.btn-default.pull-left.justify-elements-container(ng-click="form.countToggle(button)" ng-class="{'active':form.counted(button) >= 0}") 
-                      span {{button.title}} 
-                      span {{button.price}}P
-                    tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
-              .col-md-5
-                .row
-                  .col-md-3(ng-if="base.important")
-                    .bg-important.text-center ВАЖНО!
-                  .col-md-9(ng-bind-html="base.important | html")
-
-          .block-item(ng-if="base.type == 0 && base.column_width == 0")
+        div(ng-repeat="base in section.databases" class="col-md-6")
+          .block-item(ng-if="base.type == 0")
             .row
               .col-md-4(ng-if="base.image")
                 img(ng-src="{{base.image | imageFilter}}", alt="")
@@ -47,12 +25,9 @@ p.bg-danger.fixed-bottom(ng-show="form.showWarning")
                   span {{button.title}} 
                   span {{button.price}}P
                 tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
-            .row.important-section(ng-if="base.important")
-              .col-md-3
-                .bg-important.text-center ВАЖНО!
-              .col-md-9(ng-bind-html="base.important | html")
+            
 
-          .block-item.block-item-info(ng-if="base.type == 1 && base.column_width == 0")
+          .block-item.block-item-info(ng-if="base.type == 1")
             .row
               .col-md-3.text-center(ng-if="base.image")
                 img(ng-src="{{base.image | imageFilter}}", alt="")
@@ -63,10 +38,7 @@ p.bg-danger.fixed-bottom(ng-show="form.showWarning")
                   span {{button.title}} 
                   span {{button.price}}P
                 tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
-            .row.important-section(ng-if="base.important")
-              .col-md-3
-                .bg-important.text-center ВАЖНО!
-              .col-md-9(ng-bind-html="base.important | html")
+            
 
 
     
@@ -90,27 +62,29 @@ p.bg-danger.fixed-bottom(ng-show="form.showWarning")
         span.header-content Поля, необходимые для проверки
       .content.clearfix
         .col-md-12
-          .form.order-fields
-            .col-md-12
-              label.blocked(for="") Введите название заказа
-              input.form-control(type="text" ng-model="form.orderName")
-          div.form.order-fields(ng-repeat="orderItem in form.order" ng-if="orderItem.fields.length")
-            .col-md-6(ng-repeat="field in form.itemsSorted = (orderItem.fields | unique:'id')" ng-switch on="field.type")
+          //- .form.order-fields
+          //-   .col-md-12
+          //-     label.blocked(for="") Введите название заказа
+          //-     input.form-control(type="text" ng-model="form.orderName" required)
+          div.form.order-fields(ng-if="form.fieldsMerged.length")
+            .col-md-6(ng-repeat="field in form.itemsSorted = (form.fieldsMerged)" ng-switch on="field.type" ng-init="field.required = form.requiredFields[field.id]")
               .error 
-              label.blocked(for="") {{field.title}}
-              input.form-control(type="date", name="", required, ng-switch-when="1" ng-model="form.subfields[field.id]")
+              label.blocked(for="") 
+                |{{field.title}}
+                span.red(ng-if="field.required") *
+              input.form-control(type="text", name="", mask="99.99.9999" ng-switch-when="1" ng-model="form.subfields[field.id]" ng-required="field.required")
               .row(ng-switch-when="3")
                 .col-md-6
                   label От
-                  input(type="date", name="" ng-model="form.subfields[field.id][0]").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="field.required" mask="99.99.9999").form-control
                 .col-md-6
                   label До
-                  input(type="date", name="" ng-model="form.subfields[field.id][1]").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="field.required" mask="99.99.9999").form-control
               
               .form-group(ng-switch-when="2")
                 select.form-control(ng-model="form.subfields[field.id]")
                   option(ng-repeat="sub in field.subfields.split(',')") {{sub}}
-              input.form-control(type="text", name="", required, ng-switch-default ng-model="form.subfields[field.id]")
+              input.form-control(type="text", name="", ng-switch-default ng-model="form.subfields[field.id]" ng-required="field.required")
             
   .row.submit-row
     .col-md-9.text-right.left
@@ -118,4 +92,4 @@ p.bg-danger.fixed-bottom(ng-show="form.showWarning")
         span Сумма заказа:
         span.sum {{form.orderCost}}P
     .col-md-3.right
-      .btn.btn-success.btn-lg(ng-click="form.submitForm()") Заказать
+      button.btn.btn-success.btn-lg(ng-click="form.submitForm()") Заказать

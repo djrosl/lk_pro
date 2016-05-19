@@ -4,6 +4,7 @@ angular.module 'frontend'
       restrict: 'AE'
       scope:
         slug: '@'
+        reorder: '='
       templateUrl: 'app/components/requestForm/requestForm.html'
       controller: 'RequestFormController'
       controllerAs: 'form'

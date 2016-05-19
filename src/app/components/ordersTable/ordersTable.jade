@@ -16,14 +16,25 @@
         tr(ng-repeat="order in data | orderBy:'-id' | pagination:pagination.per:pagination.current")
           td 
             a(href="") {{order.id}}
-          td {{order.title}}
           td 
-            span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-repeat="button in order.orderbuttons" ng-click="openDoc(button.file)") {{button.button.title}}
+            div(ng-repeat="field in order.fields")
+              small(ng-if="field.field_id == 1") {{field.content}}
+              small(ng-if="field.field_id == 5") {{field.content}}
+              small(ng-if="field.field_id == 6") ИНН {{field.content}}
+              small(ng-if="field.field_id == 7") ОГРН {{field.content}}
+              small(ng-if="field.field_id == 8") ОГРН {{field.content}}
+          td 
+            span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-repeat="button in order.orderbuttons" ng-click="openDoc(button.file)") 
+              .tooltip(ng-if="button.status == 3") {{button.tooltip}}
+              | {{button.button.title}}
+
+            .text-center(ng-if="needMoney(order.orderbuttons)") Недостаточно {{needMoney(order.orderbuttons)}} руб. 
+              a(ui-sref="payment") Пополните баланс
             //- span
             //-   strike Идентификация
           td {{order.cost}}P
           td(ng-if="type == 'current'")
-            button.btn.btn-option 
+            a.btn.btn-option(href="{{'/reorder/'+order.id}}") 
               i.fa.fa-plus-circle
               | Дозаказать проверку
             br

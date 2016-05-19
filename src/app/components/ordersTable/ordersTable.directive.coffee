@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .directive 'ordersTable', (apiroot, $http)->
+  .directive 'ordersTable', (apiroot, $http, balance)->
     {
       restrict: 'AE'
       scope:
@@ -12,6 +12,16 @@ angular.module 'frontend'
             window.open apiroot+'/api/file?path='+filename
           else return false
           return true
+
+        scope.needMoney = (array)->
+          out = 0
+          angular.forEach array, (item)->
+
+            if parseInt(item.status) is 0
+              out+=parseInt(item.button.price)
+          out = out-balance.getBalance() if out isnt 0
+          out
+
 
         scope.pagination =
           current: 0

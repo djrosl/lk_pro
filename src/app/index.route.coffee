@@ -22,6 +22,11 @@ angular.module 'frontend'
         templateUrl: 'app/add/add.html'
         controller: 'AddController'
         controllerAs: 'add'
+      .state 'reorder',
+        url: '/reorder/:id'
+        templateUrl: 'app/add/add.html'
+        controller: 'AddReorderController'
+        controllerAs: 'add'
       .state 'help',
         url: '/help'
         templateUrl: 'app/help/help.html'

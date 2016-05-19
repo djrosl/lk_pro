@@ -5,4 +5,8 @@ angular.module 'frontend', [
   'ngAnimate',
   'angular-loading-bar',
   'angularFileUpload',
-  'angular-click-outside']
+  'angular-click-outside',
+  'angular-jquery-maskedinput',
+  'oitozero.ngSweetAlert',
+  'angularMoment'
+]

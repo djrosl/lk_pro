@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'HeaderController', ($http, $sce, activeLink, $scope, apiroot, $window, $state, balance) ->
+  .controller 'HeaderController', ($http, $sce, activeLink, $scope, apiroot, $window, $state, balance, SweetAlert) ->
     'ngInject'
     vm = this
 
@@ -7,6 +7,12 @@ angular.module 'frontend'
       $window.sessionStorage.removeItem('access_token')
       $state.go 'login'
 
+    $('body').on 'focusout', 'input[type="date"]', ()->
+      if $(this).val() < '1940-01-01' or $(this).val() > '2050-01-01'
+        SweetAlert.swal
+          title: 'Введите правильную дату!'
+          timer: 2000
+        return $(this).focus()
 
     $scope.$watch ->
       activeLink.getLink()
