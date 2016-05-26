@@ -72,14 +72,14 @@ form.container(ng-hide="!form.loaded")
               label.blocked(for="") 
                 |{{field.title}}
                 span.red(ng-if="field.required") *
-              input.form-control(type="text", name="", mask="99.99.9999" ng-switch-when="1" ng-model="form.subfields[field.id]" ng-required="field.required")
+              input.form-control(type="text", name="", rmask="99.99.9999" ng-switch-when="1" ng-model="form.subfields[field.id]" ng-required="field.required")
               .row(ng-switch-when="3")
                 .col-md-6
                   label От
-                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="field.required" mask="99.99.9999").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="field.required" rmask="99.99.9999").form-control
                 .col-md-6
                   label До
-                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="field.required" mask="99.99.9999").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="field.required" rmask="99.99.9999").form-control
               
               .form-group(ng-switch-when="2")
                 select.form-control(ng-model="form.subfields[field.id]")

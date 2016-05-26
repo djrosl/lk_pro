@@ -1,8 +1,8 @@
 .container.table-container
   .pagination.top(ng-show="pagination.pages")
-    a.btn.btn-left(ng-click="pagination.prev()")
-    a.btn(href="" ng-click="pagination.to(i)" ng-repeat="i in [] | range:pagination.pages" ng-class="{'btn-primary': pagination.current == i, 'btn-default': pagination.current != i}") {{i+1}}
-    a.btn.btn-right(ng-click="pagination.next()")
+    a.btn.btn-left(ng-click="pagination.prev()" ng-if="pagination.pages > 1")
+    a.btn(href="" ng-if="pagination.pages > 1" ng-click="pagination.to(i)" ng-repeat="i in [] | range:pagination.pages" ng-class="{'btn-primary': pagination.current == i, 'btn-default': pagination.current != i}") {{i+1}}
+    a.btn.btn-right(ng-click="pagination.next()" ng-if="pagination.pages > 1")
   .table-responsive(ng-show="pagination.pages")
     table.table.table-striped
       thead
@@ -52,6 +52,6 @@
 
 
   .pagination.bottom(ng-show="pagination.pages")
-    a.btn.btn-left(ng-click="pagination.prev()")
-    a.btn(href="" ng-click="pagination.to(i)" ng-repeat="i in [] | range:pagination.pages" ng-class="{'btn-primary': pagination.current == i, 'btn-default': pagination.current != i}") {{i+1}}
-    a.btn.btn-right(ng-click="pagination.next()")
+    a.btn.btn-left(ng-click="pagination.prev()" ng-if="pagination.pages > 1")
+    a.btn(href="" ng-click="pagination.to(i)" ng-if="pagination.pages > 1" ng-repeat="i in [] | range:pagination.pages" ng-class="{'btn-primary': pagination.current == i, 'btn-default': pagination.current != i}") {{i+1}}
+    a.btn.btn-right(ng-click="pagination.next()" ng-if="pagination.pages > 1")

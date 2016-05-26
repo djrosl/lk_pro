@@ -24,7 +24,7 @@
             input#inp1.form-control(type="text" ng-model="cash.form.summ" required)
           .form-group
             label(for="inp2") Дата *
-            input#inp2(type="text" mask="99.99.9999 99:99" ng-model="cash.form.date" required).form-control
+            input#inp2(type="text" rmask="99.99.9999 99:99" datetime="true" ng-model="cash.form.date" required).form-control
           .form-group
             label(for="inp3") Способ оплаты *
             select#inp3.form-control(ng-model="cash.form.cash_type")

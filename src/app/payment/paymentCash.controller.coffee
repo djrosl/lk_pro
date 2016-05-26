@@ -14,7 +14,6 @@ angular.module 'frontend'
         vm.form.check = true
       onCompleteItem: (item, response)->
         vm.form.check = item.file.name
-        vm.form.date = new Date vm.form.date
         $http.post apiroot+'/api/payment-add', vm.form
         .success (s)->
           console.log s
