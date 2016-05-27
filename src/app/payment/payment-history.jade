@@ -1,14 +1,25 @@
 .container.table-container
+  .pagination.top(ng-show="history.pagination.pages")
+    a.btn.btn-left(ng-click="history.pagination.prev()" ng-if="history.pagination.pages > 1")
+    a.btn(href="" ng-if="history.pagination.pages > 1" ng-click="history.pagination.to(i)" ng-repeat="i in [] | range:history.pagination.pages" ng-class="{'btn-primary': history.pagination.current == i, 'btn-default': history.pagination.current != i}") {{i+1}}
+    a.btn.btn-right(ng-click="history.pagination.next()" ng-if="history.pagination.pages > 1")
   .table-responsive
     table.table.table-striped
       thead
         tr
-          th Дата
+          th.text-left Дата
+          th Отчет
           th Сумма
-          th Тип
+          th Опции
       tbody
-        tr(ng-repeat="payment in history.data | orderBy:'-date'" ng-class="{red:payment.order_id}" class="green")
-          td {{payment.date}}
-          td {{payment.summ}}
-          td(ng-if="payment.order_id") Оплата за заказ №{{payment.order_id}}
-          td(ng-if="!payment.order_id") Зачисление средств на личный счет
+        tr(ng-repeat="payment in history.data | orderBy:'-date' | pagination:history.pagination.per:history.pagination.current")
+          td.text-left {{payment.date | amDateFormat:'DD.MM.YYYY HH:mm'}}
+          td(ng-if="payment.cash_type == 0") Яндекс.Деньги
+          td(ng-if="payment.cash_type == 1") Qiwi
+          td {{payment.summ}} Р
+          td.text-info(ng-if="payment.status == 1") Проведен
+          td.text-danger(ng-if="payment.status == 0") Ожидает
+  .pagination.bottom(ng-show="history.pagination.pages")
+    a.btn.btn-left(ng-click="history.pagination.prev()" ng-if="history.pagination.pages > 1")
+    a.btn(href="" ng-click="history.pagination.to(i)" ng-if="history.pagination.pages > 1" ng-repeat="i in [] | range:history.pagination.pages" ng-class="{'btn-primary': history.pagination.current == i, 'btn-default': history.pagination.current != i}") {{i+1}}
+    a.btn.btn-right(ng-click="history.pagination.next()" ng-if="history.pagination.pages > 1")
