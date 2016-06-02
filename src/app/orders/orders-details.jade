@@ -1,0 +1,38 @@
+.container-fluid.blue
+  .container.text-center
+    h1.h1
+      i.fa.fa-file-o 
+      | Заказ №{{details.id}}
+
+.container
+  table.table.table-striped
+    tbody
+      tr
+        td 
+          h4 Заказ № {{details.id}}
+        td 
+          h4 Данные
+          table.table.table-striped
+            tbody
+              tr(ng-repeat="field in details.data.fields")
+                td
+                  b {{field.field.title}}
+                td {{field.content}}
+      tr
+        td 
+          h4 Отчеты
+        td
+          table.table.table-striped
+            thead
+              tr
+                th Запрос
+                th Дата
+                th Цена
+            tbody
+              tr(ng-repeat="button in details.data.orderbuttons" ng-click="openDoc(button.file)")
+                td.butts 
+                  span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}") 
+                    .tooltip(ng-if="button.status == 3") {{button.tooltip}}
+                    | {{button.button.title}}
+                td {{details.data.date}}
+                td {{button.button.price}}

@@ -38,6 +38,13 @@
         text-decoration: underline
         &:hover
           text-decoration none
+        &.btn.btn-option
+          color rgb(4, 156, 219)
+          font-weight 400
+          text-decoration none
+          i
+            color: rgb(51, 153, 102)
+            
     th
       &:before
         background: #fff
@@ -52,57 +59,60 @@
         font-size 18px
       &:nth-child(4)
         font-size 16px
-      span
-        &:hover:after,
-        &:hover .tooltip
-          opacity 1
-          visibility visible
-        &:after
-          content: 'Заказ в очереди'
-        &:after,
-        .tooltip
-          position: absolute;
-          bottom: 120%;
-          display: block;
-          min-width: 100%;
-          color: #000;
-          left: -50%;
-          right -50%
-          white-space nowrap
-          margin 0 auto
-          text-align: center;
-          border-radius: 3px;
-          padding: 2px 4px;
-          opacity: 0;
-          -webkit-transition: all 0.4s;
-          transition: all 0.4s;
-          z-index: 1;
-          visibility hidden
-          text-shadow 0 0 15px #000
-        color #fff
-        padding 2px 3px
-        position relative
-        font-weight 400
-        strike
-          color #ccc
-        border-radius 3px
-        margin 3px
-        display inline-block
-        font-size 12px
-        background-color: rgb(153, 153, 153)
-        &.red
-          background-color: rgb(204, 0, 0)
-          &:after
-            display none
-        &.green
-          background-color: rgb(51, 153, 0)
-          cursor pointer
-          &:after
-            content: 'Заказ выполнен'
-        &.orange
-          background-color: rgb(255, 153, 0)
-          &:after
-            content: 'Заказ в работе'
+
+.butts
+  span
+    &:hover:after,
+    &:hover .tooltip
+      opacity 1
+      visibility visible
+    &:after
+      content: 'Заказ в очереди'
+    &:after,
+    .tooltip
+      position: absolute;
+      bottom: 120%;
+      display: block;
+      min-width: 100%;
+      color: #000;
+      left: -50%;
+      right -50%
+      white-space nowrap
+      margin 0 auto
+      text-align: center;
+      border-radius: 3px;
+      padding: 2px 4px;
+      opacity: 0;
+      -webkit-transition: all 0.4s;
+      transition: all 0.4s;
+      z-index: 1;
+      visibility hidden
+      text-shadow 0 0 15px #000
+    color #fff
+    padding 2px 3px
+    position relative
+    font-weight 400
+    strike
+      color #ccc
+    border-radius 3px
+    margin 3px
+    display inline-block
+    font-size 12px
+    background-color: rgb(153, 153, 153)
+    &.red
+      background-color: rgb(204, 0, 0)
+      &:after
+        display none
+    &.green
+      background-color: rgb(51, 153, 0)
+      cursor pointer
+      &:after
+        content: 'Заказ выполнен'
+    &.orange
+      background-color: rgb(255, 153, 0)
+      &:after
+        content: 'Заказ в работе'
 th:last-child
     max-width: 200px
     width: 100px
+    

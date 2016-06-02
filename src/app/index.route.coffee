@@ -17,6 +17,11 @@ angular.module 'frontend'
         templateUrl: 'app/orders/orders-archive.html'
         controller: 'OrdersArchiveController'
         controllerAs: 'archive'
+      .state 'orders.details',
+        url: '/details/:id'
+        templateUrl: 'app/orders/orders-details.html'
+        controller: 'OrdersDetailsController'
+        controllerAs: 'details'
       .state 'add',
         url: '/add/'
         templateUrl: 'app/add/add.html'
