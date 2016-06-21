@@ -75,22 +75,22 @@ angular.module 'frontend'
 
     $scope.$watch ->
       vm.fieldsMerged
-    , (newVal, oldVal)->
-        if newVal
-          i = 0
-          while i < vm.fieldsMerged.length
-            if vm.fieldsMerged[i].type is '4'
-              vm.fieldsMerged[i].uploader = new FileUploader
-                url: apiroot+'/api/add-file-field'
-                alias: 'fieldFile'
-                removeAfterUpload: true
-                queueLimit: 1
-                onCompleteItem: (item, response)->
-                  vm.subfields[response.id] = response.path
-                headers:
-                  Authorization: 'Bearer ' + $window.sessionStorage.access_token
-                  FieldId: vm.fieldsMerged[i].id
-            i++
+    ,(newVal, oldVal)->
+      if newVal
+        i = 0
+        while i < vm.fieldsMerged.length
+          if vm.fieldsMerged[i].type is '4'
+            vm.fieldsMerged[i].uploader = new FileUploader
+              url: apiroot+'/api/add-file-field'
+              alias: 'fieldFile'
+              removeAfterUpload: true
+              queueLimit: 1
+              onCompleteItem: (item, response)->
+                vm.subfields[response.id] = response.path
+              headers:
+                Authorization: 'Bearer ' + $window.sessionStorage.access_token
+                FieldId: vm.fieldsMerged[i].id
+          i++
     
     vm.countToggle = (obj)->
       index = vm.counted obj
