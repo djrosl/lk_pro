@@ -6,7 +6,8 @@ angular.module 'frontend', [
   'angular-loading-bar',
   'angularFileUpload',
   'angular-click-outside',
-  'angular-jquery-maskedinput',
+  #'angular-jquery-maskedinput',
   'oitozero.ngSweetAlert',
-  'angularMoment'
+  'angularMoment',
+  "green.inputmask4angular"
 ]
