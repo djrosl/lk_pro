@@ -15,9 +15,9 @@
       .form-group.text-left
         input.login-checkbox(type="checkbox" id="remember" checked="checked")
         label.login-label(for="remember") Запомнить меня
-      .btn-group-login
-        a.btn.btn-warning.pull-left(ng-click="login.curTab = 'register'") Регистрация
-        button.btn.btn-primary.pull-right Вход
+        a.pull-right(ng-click="login.curTab = 'register'" href="") Регистрация
+      .btn-group-login.log
+        button.btn.btn-primary Войти в свой аккаунт
     
 
     form.form.register-block(ng-show="login.curTab=='register'" ng-submit="login.registerForm()" method="post")

@@ -25,5 +25,5 @@ header.main
             a.exit(href="" ng-click="header.logout()") Выход
 
     .row.header-middle
-      .col-md-4(ng-repeat="column in header.columns")
-        .info-box.text-center(ng-bind-html="column")
+      .col-md-12(ng-repeat="column in header.columns")
+        .info-box(ng-bind-html="column")

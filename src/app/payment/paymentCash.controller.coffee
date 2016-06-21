@@ -8,6 +8,10 @@ angular.module 'frontend'
       date: ''
     }
 
+    $http.get apiroot+'/api/cash-type'
+    .success (s)->
+      vm.cashTypes = s
+
     vm.uploader = new FileUploader
       url: apiroot+'/api/file-check'
       onAfterAddingFile: (item)->

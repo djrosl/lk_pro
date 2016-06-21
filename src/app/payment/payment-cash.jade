@@ -3,19 +3,14 @@
       .content.text-left
         p Перечислите деньги на один из наших кошельков:
         br
-        .col-md-2
-          img(src="/assets/images/ya-icon.png", alt="")
-        .col-md-10
-          p 
-           |Яндекс.Деньги: 
-           b 410011962071748
-        .col-md-2
-          img(src="/assets/images/qicon.png", alt="")
-        .col-md-10
-          p 
-           | QIWI: 
-           b 79254467120
-          br
+        div(ng-repeat="type in cash.cashTypes")
+          .col-md-2
+            img(ng-src="{{type.icon | imageFilter}}", alt="")
+          .col-md-10
+            p 
+             |{{type.title}}: 
+             b {{type.number}}
+        
         p После этого заполните форму и загрузите скан или фотографию чека:
 
         form.form
@@ -27,9 +22,7 @@
             input#inp2(type="text" rmask="99.99.9999 99:99" datetime="true" ng-model="cash.form.date" required).form-control
           .form-group
             label(for="inp3") Способ оплаты *
-            select#inp3.form-control(ng-model="cash.form.cash_type")
-              option(value="0") Яндекс.Деньги
-              option(value="1") QIWI
+            select#inp3.form-control(ng-model="cash.form.cash_type" ng-init="cash.form.cash_type = cash.cashTypes[0]" ng-options="item as item.title for item in cash.cashTypes track by item.id")
           .form-group
             label(for="inp4") Фото чека *
             br

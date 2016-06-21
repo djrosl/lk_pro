@@ -28,6 +28,10 @@ angular.module 'frontend'
         exited = true
 
       return false if exited
+      angular.forEach vm.fieldsMerged, (item)->
+        if item.type is '4'
+          item.uploader.uploadItem(0)
+      return false
       data =
         sub: vm.subfields
         order: vm.order
@@ -68,6 +72,25 @@ angular.module 'frontend'
         return
       return
 
+
+    $scope.$watch ->
+      vm.fieldsMerged
+    , (newVal, oldVal)->
+        if newVal
+          i = 0
+          while i < vm.fieldsMerged.length
+            if vm.fieldsMerged[i].type is '4'
+              vm.fieldsMerged[i].uploader = new FileUploader
+                url: apiroot+'/api/add-file-field'
+                alias: 'fieldFile'
+                removeAfterUpload: true
+                queueLimit: 1
+                onCompleteItem: (item, response)->
+                  vm.subfields[response.id] = response.path
+                headers:
+                  Authorization: 'Bearer ' + $window.sessionStorage.access_token
+                  FieldId: vm.fieldsMerged[i].id
+            i++
     
     vm.countToggle = (obj)->
       index = vm.counted obj
@@ -91,11 +114,7 @@ angular.module 'frontend'
               vm.requiredFields[s.field_id] = s.required
         #vm.isRequired(v.id)
 
-    uploader = $scope.uploader = new FileUploader
-      url: apiroot+'/api/add-passport-photo'
-      alias: 'images'
-      headers:
-        Authorization: 'Bearer ' + $window.sessionStorage.access_token
+    
     $scope.$watch 'slug', (newVal, oldVal)->
       if newVal? and newVal isnt oldVal
         vm.type = {}

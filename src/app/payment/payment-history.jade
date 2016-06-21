@@ -8,15 +8,14 @@
       thead
         tr
           th.text-left Дата
-          th Отчет
+          th Способ оплаты
           th Сумма
-          th Опции
+          th Статус
       tbody
         tr(ng-repeat="payment in history.data | orderBy:'-date' | pagination:history.pagination.per:history.pagination.current")
-          td.text-left {{payment.date | amDateFormat:'DD.MM.YYYY HH:mm'}}
-          td(ng-if="payment.cash_type == 0") Яндекс.Деньги
-          td(ng-if="payment.cash_type == 1") Qiwi
-          td {{payment.summ}} Р
+          td.text-left {{payment.date | amDateFormat:'DD.MM.YYYY'}}
+          td {{payment.cashType.title}}
+          td {{payment.summ}} ₽
           td.text-info(ng-if="payment.status == 1") Проведен
           td.text-danger(ng-if="payment.status == 0") Ожидает
   .pagination.bottom(ng-show="history.pagination.pages")
