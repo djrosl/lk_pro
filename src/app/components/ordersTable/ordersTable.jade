@@ -24,9 +24,13 @@
               small(ng-if="field.field_id == 7") ОГРН {{field.content}}
               small(ng-if="field.field_id == 8") ОГРН {{field.content}}
           td.butts 
-            span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-repeat="button in order.orderbuttons" ng-click="openDoc(button.file)") 
-              .tooltip(ng-if="button.status == 3") {{button.tooltip}}
-              | {{button.button.title}}
+            div(ng-repeat="button in order.orderbuttons" ng-class="{'buts-wrp':!button.tooltip}")
+              span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-click="openDoc(button.file)") 
+                .tooltip(ng-if="button.status == 3") {{button.tooltip}}
+                | {{button.button.title}}
+              | {{button.tooltip}}
+              a(href="{{'/reorder/'+order.id}}#fields" ng-if="button.status == 4") Недостаточно данных
+
 
             .text-center(ng-if="needMoney(order.orderbuttons)") Недостаточно {{needMoney(order.orderbuttons)}} руб. 
               a(ui-sref="payment") Пополните баланс
@@ -38,10 +42,10 @@
               i.fa.fa-plus-circle
               | Дозаказать проверку
             br
-            button.btn.btn-option(ng-click="changeStatus(order, 4)")
+            button.btn.btn-option(ng-click="changeStatus(order, 4)" ng-show="showArchive(order.orderbuttons)")
               i.fa.fa-archive
               | Переместить в архив
-            br
+            br(ng-show="showArchive(order.orderbuttons)")
             button.btn.btn-option(ng-click="changeStatus(order, 0)")
               i.fa.fa-ban
               | Отменить заказ

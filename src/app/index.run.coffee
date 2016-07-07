@@ -1,6 +1,10 @@
 angular.module 'frontend'
-  .run ($log, $state, $rootScope, $timeout) ->
+  .run ($log, $state, $rootScope, $timeout, $location, $anchorScroll) ->
     'ngInject'
+
+    $rootScope.$on '$routeChangeSuccess', (newRoute, oldRoute) ->
+      if $location.hash()
+        $anchorScroll()
 
     $rootScope.loaded = false
     $rootScope.$on 'loading:finish', ->

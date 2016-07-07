@@ -14,13 +14,23 @@ angular.module 'frontend'
           return true
 
         scope.needMoney = (array)->
+          #DEVEL
+          #return false
+          #\\DEVEL
           out = 0
           angular.forEach array, (item)->
 
-            if parseInt(item.status) is 0
+            if parseInt(item.payed) is 0
               out+=parseInt(item.button.price)
           out = out-balance.getBalance() if out isnt 0
           out
+
+        scope.showArchive = (orderbuttons)->
+          out = true
+          angular.forEach orderbuttons, (item)->
+            if item.status isnt '3' and item.status isnt '2'
+              out = false
+          return out
 
 
         scope.pagination =

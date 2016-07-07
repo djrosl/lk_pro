@@ -39,7 +39,7 @@ form.container(ng-hide="!form.loaded")
                   span {{button.price}}₽
                 tooltip(id="{{base.id}}" content="{time:button.time, example:button.example, help:button.help}")
 
-    .block.personal-data
+    .block.personal-data#fields
       header.bg-primary
         span.header-content Поля, необходимые для проверки
       .content.clearfix
@@ -69,6 +69,10 @@ form.container(ng-hide="!form.loaded")
                   i.fa.fa-times-circle(ng-click="item.remove()")
                   div(ng-thumb="{ file: item._file, height: 30 }" class="img-thumbnail")
               input.form-control(type="text", name="", ng-switch-default ng-model="form.subfields[field.id]" ng-required="field.required")
+
+              .form-group(ng-switch-when="5")
+                select.form-control(ng-model="form.subfields[field.id]")
+                  option(ng-repeat="sub in form.regions") {{sub}}
             
   .row.submit-row
     .col-md-9.text-right.left

@@ -1,8 +1,10 @@
 angular.module 'frontend'
   .controller 'RequestFormController',
-  ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window, $state, balance, SweetAlert, moment) ->
+  ($scope, $http, $timeout, apiroot, $filter, FileUploader, $window, $state, balance, SweetAlert, moment, regions) ->
     'ngInject'
     vm = this
+
+    vm.regions = regions
 
     vm.passport = {}
 
@@ -31,7 +33,7 @@ angular.module 'frontend'
       angular.forEach vm.fieldsMerged, (item)->
         if item.type is '4'
           item.uploader.uploadItem(0)
-      return false
+      
       data =
         sub: vm.subfields
         order: vm.order

@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'HeaderController', ($http, $sce, activeLink, $scope, apiroot, $window, $state, balance, SweetAlert) ->
+  .controller 'HeaderController', ($http, $sce, activeLink, $scope, apiroot, $window, $state, balance, SweetAlert, regions) ->
     'ngInject'
     vm = this
 
