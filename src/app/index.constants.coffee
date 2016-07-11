@@ -1,5 +1,5 @@
 angular.module('frontend')
-    .constant 'apiroot', 'http://api.lkpro.acrux.tk'
+    .constant 'apiroot', 'http://api.lkpro.acrux.tk/index.php'
     .constant 'regions', ["Алания (Республика Северная Осетия - Алания), Владикавказ",
         "Алтай (Республика Алтай) — Горно-Алтайск",
         "Алтайский край — Барнаул, Бийск",
