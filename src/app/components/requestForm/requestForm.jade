@@ -54,10 +54,10 @@ form.container(ng-hide="!form.loaded")
               .row(ng-switch-when="3")
                 .col-md-6
                   label От
-                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="field.required != '0'" rmask="99.99.9999").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="parseInt(field.required)" rmask="99.99.9999").form-control
                 .col-md-6
                   label До
-                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="field.required != '0'" rmask="99.99.9999").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="parseInt(field.required)" rmask="99.99.9999").form-control
               
               .form-group(ng-switch-when="2")
                 select.form-control(ng-model="form.subfields[field.id]")
