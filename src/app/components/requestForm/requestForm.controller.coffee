@@ -110,10 +110,10 @@ angular.module 'frontend'
         angular.forEach v.bfields, (s)->
           if vm.requiredFields[s.field_id]
             if s.required
-              vm.requiredFields[s.field_id] = s.required
+              vm.requiredFields[s.field_id] = parseInt(s.required)
           else if !vm.requiredFields[s.field_id]
             if s.required
-              vm.requiredFields[s.field_id] = s.required
+              vm.requiredFields[s.field_id] = parseInt(s.required)
         #vm.isRequired(v.id)
 
     
