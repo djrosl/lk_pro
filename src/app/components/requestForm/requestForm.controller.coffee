@@ -7,7 +7,7 @@ angular.module 'frontend'
     vm.regions = regions
 
     vm.passport = {}
-
+    orderID = 0
     $scope.$watch ->
       vm.orderCost
     , (newVal, oldVal)->
@@ -17,8 +17,8 @@ angular.module 'frontend'
 
     submitOrder = ->
       exited = false
-      $('.order-fields input[required]').each ()->
-        if !$(this).val()
+      $('.order-fields [required]').each ()->
+        if !$(this).val() or $(this).val() is '? undefined:undefined ?'
           SweetAlert.swal
             title: 'Заполните поля'
             timer: 2000
@@ -30,23 +30,30 @@ angular.module 'frontend'
         exited = true
 
       return false if exited
-      angular.forEach vm.fieldsMerged, (item)->
-        if item.type is '4'
-          item.uploader.uploadItem(0)
       
+      ord = angular.copy vm.order
+      angular.forEach ord, (order)->
+        angular.forEach order.fields, (field, k)->
+          delete field.uploader if field.uploader
+
       data =
         sub: vm.subfields
-        order: vm.order
+        order: ord
         cost: vm.orderCost
         base_type: vm.base_type
         name: vm.orderName
+
       data.reorder = vm.reorder if vm.reorder
       $http.post apiroot+'/api/order', data
       .error (e)->
         console.log e
       .success (s)->
+        orderID = s.id
+        angular.forEach vm.fieldsMerged, (item)->
+          if item.type is '4'
+            item.uploader.uploadAll()
         console.log s
-        balance.setBalance s
+        balance.setBalance s.balance
         $state.go 'orders.current'
 
     vm.explode = (del, arr)->
@@ -86,9 +93,8 @@ angular.module 'frontend'
               url: apiroot+'/api/add-file-field'
               alias: 'fieldFile'
               removeAfterUpload: true
-              queueLimit: 1
               onCompleteItem: (item, response)->
-                vm.subfields[response.id] = response.path
+                if vm.subfields[response.id] then vm.subfields[response.id] += response.path+';' else vm.subfields[response.id] = response.path+';'
               headers:
                 Authorization: 'Bearer ' + $window.sessionStorage.access_token
                 FieldId: vm.fieldsMerged[i].id
@@ -106,7 +112,9 @@ angular.module 'frontend'
       vm.fieldsMerged = []
       vm.requiredFields = []
       angular.forEach vm.order, (v)->
+        console.log v.fields, vm.fieldsMerged
         mergeByProperty vm.fieldsMerged, v.fields, 'id'
+
         angular.forEach v.bfields, (s)->
           if vm.requiredFields[s.field_id]
             if s.required

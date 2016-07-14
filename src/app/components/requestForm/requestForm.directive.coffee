@@ -5,7 +5,7 @@ angular.module 'frontend'
       scope:
         slug: '@'
         reorder: '='
-      templateUrl: 'app/components/requestForm/requestForm.html'
+      templateUrl: 'app/components/requestForm/requestForm-template.html'
       controller: 'RequestFormController'
       controllerAs: 'form'
     }

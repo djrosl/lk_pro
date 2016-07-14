@@ -3,13 +3,12 @@
   .text-center(ng-init="login.curTab='login'")
     img.logo(src='/assets/images/logo.png')
     form.form.signin-block(ng-show="login.curTab=='login'" ng-submit="login.loginForm()" method="post")
-      
+      .info-text-wrp
+        .info-text(ng-if="login.error['username'] || login.error['password']") Введите правильное имя пользователя и пароль
       .form-group
-        .info-text {{login.error['username']}}
         input.login-page-control.username(type="text" placeholder="Имя пользователя" ng-model="login.userModel.username")
       
-      .form-group
-        .info-text {{login.error['password']}}
+      .form-group.mg-min
         input.login-page-control.password(type="password" placeholder="Пароль" ng-model="login.userModel.password")
 
       .form-group.text-left
