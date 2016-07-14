@@ -1,43 +1,44 @@
-.login-wrapper
-.login-page.vertical-center(vegas="login.vegasConfig")
-  .text-center(ng-init="login.curTab='login'")
-    img.logo(src='/assets/images/logo.png')
-    form.form.signin-block(ng-show="login.curTab=='login'" ng-submit="login.loginForm()" method="post")
-      .info-text-wrp
-        .info-text(ng-if="login.error['username'] || login.error['password']") Введите правильное имя пользователя и пароль
-      .form-group
-        input.login-page-control.username(type="text" placeholder="Имя пользователя" ng-model="login.userModel.username")
-      
-      .form-group.mg-min
-        input.login-page-control.password(type="password" placeholder="Пароль" ng-model="login.userModel.password")
+.black-bg
+  .login-wrapper
+  .login-page.vertical-center(vegas="login.vegasConfig")
+    .text-center(ng-init="login.curTab='login'")
+      img.logo(src='/assets/images/logo.png')
+      form.form.signin-block(ng-show="login.curTab=='login'" ng-submit="login.loginForm()" method="post")
+        .info-text-wrp
+          .info-text(ng-if="login.error['username'] || login.error['password']") Введите правильное имя пользователя и пароль
+        .form-group
+          input.login-page-control.username(type="text" placeholder="Имя пользователя" ng-model="login.userModel.username")
+        
+        .form-group.mg-min
+          input.login-page-control.password(type="password" placeholder="Пароль" ng-model="login.userModel.password")
 
-      .form-group.text-left
-        input.login-checkbox(type="checkbox" id="remember" checked="checked")
-        label.login-label(for="remember") Запомнить меня
-        a.pull-right(ng-click="login.curTab = 'register'" href="") Регистрация
-      .btn-group-login.log
-        button.btn.btn-primary Войти в свой аккаунт
-    
-
-    form.form.register-block(ng-show="login.curTab=='register'" ng-submit="login.registerForm()" method="post")
+        .form-group.text-left
+          input.login-checkbox(type="checkbox" id="remember" checked="checked")
+          label.login-label(for="remember") Запомнить меня
+          a.pull-right(ng-click="login.curTab = 'register'" href="") Регистрация
+        .btn-group-login.log
+          button.btn.btn-primary Войти в свой аккаунт
       
-      .info-text {{login.registerError['code']}}
-      .form-group.green-label
-        input.login-page-control.code(type="text" placeholder="Код для регистрации" ng-model="login.registerModel.code")
-      .info-text {{login.registerError['username']}}
-      .form-group.green-label
-        input.login-page-control.username(type="text" placeholder="Имя пользователя" ng-model="login.registerModel.username")
-      .info-text {{login.registerError['password']}}
-      .form-group.green-label
-        input.login-page-control.password(type="password" placeholder="Пароль" ng-model="login.registerModel.password")
-      .info-text {{login.registerError['email']}}
-      .form-group.green-label
-        input.login-page-control.email(type="text" placeholder="E-mail" ng-model="login.registerModel.email")
-      br
-      .form-group
-        input.login-page-control.jabber(type="text" placeholder="Jabber" ng-model="login.registerModel.jabber")
-      .form-group
-        input.login-page-control.icq(type="text" placeholder="ICQ" ng-model="login.registerModel.icq")
-      .btn-group-login
-        a.btn.btn-warning.pull-left(ng-click="login.curTab = 'login'") Назад
-        button.btn.btn-primary.pull-right Подтвердить
+
+      form.form.register-block(ng-show="login.curTab=='register'" ng-submit="login.registerForm()" method="post")
+        
+        .info-text {{login.registerError['code']}}
+        .form-group.green-label
+          input.login-page-control.code(type="text" placeholder="Код для регистрации" ng-model="login.registerModel.code")
+        .info-text {{login.registerError['username']}}
+        .form-group.green-label
+          input.login-page-control.username(type="text" placeholder="Имя пользователя" ng-model="login.registerModel.username")
+        .info-text {{login.registerError['password']}}
+        .form-group.green-label
+          input.login-page-control.password(type="password" placeholder="Пароль" ng-model="login.registerModel.password")
+        .info-text {{login.registerError['email']}}
+        .form-group.green-label
+          input.login-page-control.email(type="text" placeholder="E-mail" ng-model="login.registerModel.email")
+        br
+        .form-group
+          input.login-page-control.jabber(type="text" placeholder="Jabber" ng-model="login.registerModel.jabber")
+        .form-group
+          input.login-page-control.icq(type="text" placeholder="ICQ" ng-model="login.registerModel.icq")
+        .btn-group-login
+          a.btn.btn-warning.pull-left(ng-click="login.curTab = 'login'") Назад
+          button.btn.btn-primary.pull-right Подтвердить
