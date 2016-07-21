@@ -1,6 +1,7 @@
 .black-bg
   .login-wrapper
-  .login-page.vertical-center(vegas="login.vegasConfig")
+  .vertical-center(vegas="login.vegasConfig")
+  .login-page.vertical-center
     .text-center(ng-init="login.curTab='login'")
       img.logo(src='/assets/images/logo.png')
       form.form.signin-block(ng-show="login.curTab=='login'" ng-submit="login.loginForm()" method="post")
@@ -8,10 +9,8 @@
           .info-text(ng-if="login.error['username'] || login.error['password']") Введите правильное имя пользователя и пароль
         .form-group
           input.login-page-control.username(type="text" placeholder="Имя пользователя" ng-model="login.userModel.username")
-        
         .form-group.mg-min
           input.login-page-control.password(type="password" placeholder="Пароль" ng-model="login.userModel.password")
-
         .form-group.text-left
           input.login-checkbox(type="checkbox" id="remember" checked="checked")
           label.login-label(for="remember") Запомнить меня
