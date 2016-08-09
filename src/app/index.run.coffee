@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .run ($log, $state, $rootScope, $timeout, $location, $anchorScroll) ->
+  .run ($log, $state, $rootScope, $timeout, $location, $anchorScroll, activeLink) ->
     'ngInject'
 
     $rootScope.$on '$routeChangeSuccess', (newRoute, oldRoute) ->
