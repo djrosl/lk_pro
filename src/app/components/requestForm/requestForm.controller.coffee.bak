@@ -6,9 +6,6 @@ angular.module 'frontend'
 
     vm.regions = regions
 
-    vm.openurl = (url)->
-      window.open url, '_blank'
-
     vm.passport = {}
     orderID = 0
     $scope.$watch ->
@@ -52,6 +49,9 @@ angular.module 'frontend'
         console.log e
       .success (s)->
         orderID = s.id
+        angular.forEach vm.fieldsMerged, (item)->
+          if item.type is '4'
+            item.uploader.uploadAll()
         console.log s
         balance.setBalance s.balance
         $state.go 'orders.current'
@@ -76,9 +76,29 @@ angular.module 'frontend'
         arr1obj = _.find(arr1, (arr1obj) ->
           arr1obj[prop] == arr2obj[prop]
         )
+        #If the object already exist extend it with the new values from arr2, otherwise just add the new object to arr1
         if arr1obj then _.extend(arr1obj, arr2obj) else arr1.push(arr2obj)
         return
       return
+
+
+    $scope.$watch ->
+      vm.fieldsMerged
+    ,(newVal, oldVal)->
+      if newVal
+        i = 0
+        while i < vm.fieldsMerged.length
+          if vm.fieldsMerged[i].type is '4'
+            vm.fieldsMerged[i].uploader = new FileUploader
+              url: apiroot+'/api/add-file-field'
+              alias: 'fieldFile'
+              removeAfterUpload: true
+              onCompleteItem: (item, response)->
+                if vm.subfields[response.id] then vm.subfields[response.id] += response.path+';' else vm.subfields[response.id] = response.path+';'
+              headers:
+                Authorization: 'Bearer ' + $window.sessionStorage.access_token
+                FieldId: vm.fieldsMerged[i].id
+          i++
     
     vm.countToggle = (obj)->
       index = vm.counted obj
@@ -118,6 +138,29 @@ angular.module 'frontend'
               vm.loaded = 1
             ,200,false
 
+    submitPass = ->
+      if vm.passport
+        vm.formErrors = []
+        $http.get(apiroot+'/api/dashboard')
+        .error (e)->
+          console.log e
+        .success (s)->
+          vm.passport.user_id = s.id
+          req =
+            method: 'POST'
+            data: vm.passport
+            url: apiroot+'/api/add-passport'
+          $http(req)
+          .success (s)->
+            console.log s
+            uploader.uploadAll()
+          .error (e)->
+            console.log e
+            vm.formErrors = _.indexBy e, 'field'
+      else return true
+
+
+
     $scope.$watch 'reorder', (reorder)->
       if reorder
         vm.reorder = reorder.model.id
@@ -132,5 +175,20 @@ angular.module 'frontend'
             vm.subfields[v.field.id] = v.content
         angular.forEach reorder.order_buttons, (v)->
           vm.countToggle v.button
+
+
+
+    vm.isRequired = (button_id)->
+      ###angular.forEach vm.fieldsMerged, (f)->
+        $http.get(apiroot+'/api/is-required?button_id='+button_id+'&field_id='+f.id).success (s)->
+          if f.required
+            if s.required
+              f.required = s.required
+          else if !f.required
+            if s.required
+              f.required = s.required###
+      return
+
+
 
     return

@@ -54,22 +54,21 @@ form.container(ng-hide="!form.loaded")
               .row(ng-switch-when="3")
                 .col-md-6
                   label От
-                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="field.required" input-mask="'date'").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][0]" ng-required="field.required" rmask="99.99.9999").form-control
                 .col-md-6
                   label До
-                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="field.required" input-mask="'date'").form-control
+                  input(type="text", name="" ng-model="form.subfields[field.id][1]" ng-required="field.required" rmask="99.99.9999").form-control
               
               .form-group(ng-switch-when="2")
                 select.form-control(ng-model="form.subfields[field.id]" ng-required="field.required")
                   option(ng-repeat="sub in field.subfields.split(',')") {{sub}}
 
               .form-group.input-file-wrp(ng-switch-when="4")
-                label.btn.btn-primary.inputfile-btn(for="inputfile{{field.id}}") Прикрепить файл
-                input.hidden(id="inputfile{{field.id}}" type="file" ng-required="field.required" fileread="form.subfields[field.id]" multiple="multiple")
+                input(nv-file-select="", uploader="field.uploader", type="file" ng-required="field.required")
                 .thumbs-wrp
-                  .img-wrp(ng-repeat="item in form.subfields[field.id] track by $index")
-                    i.fa.fa-times-circle(ng-click="form.subfields[field.id].splice($index,1)")
-                    img(ng-src="{{item}}" height="30" ng-click="form.openurl(item)")
+                  .img-wrp(ng-repeat="item in field.uploader.queue")
+                    i.fa.fa-times-circle(ng-click="item.remove()")
+                    div(ng-thumb="{ file: item._file, height: 30 }" class="img-thumbnail")
               input.form-control(type="text", name="", ng-switch-default ng-model="form.subfields[field.id]" ng-required="field.required")
 
               .form-group(ng-switch-when="5")
