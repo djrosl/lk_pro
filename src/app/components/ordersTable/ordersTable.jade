@@ -13,7 +13,7 @@
           th Сумма
           th Опции
       tbody
-        tr(ng-repeat="order in data | orderBy:'-id' | pagination:pagination.per:pagination.current")
+        tr(ng-repeat="order in data | orderBy:'-date' | pagination:pagination.per:pagination.current")
           td 
             a(ui-sref="orders.details({id:order.id})") {{order.id}}
           td 
@@ -25,8 +25,8 @@
               small(ng-if="field.field_id == 8") ОГРН {{field.content}}
           td.butts 
             div(ng-repeat="button in order.orderbuttons" ng-class="{'buts-wrp':!button.tooltip}")
-              span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1}" ng-click="openDoc(button.file)") 
-                .tooltip(ng-if="button.status == 3") {{button.tooltip}}
+              span(ng-class="{green:button.status == 2,red:button.status == 3,orange:button.status == 1, 'need-money': needMoney(order.orderbuttons)}" ng-click="openDoc(button.file)") 
+                .tooltip(ng-if="button.status == 3 && !needMoney(order.orderbuttons)") {{button.tooltip}}
                 | {{button.button.title}}
               | {{button.tooltip}}
               a(href="{{'/reorder/'+order.id}}#fields" ng-if="button.status == 4") Недостаточно данных
