@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .controller 'HeaderController', ($http, $sce, activeLink, $scope, apiroot, $window, $state, balance, SweetAlert, regions) ->
+  .controller 'HeaderController', ($interval, $http, $sce, activeLink, $scope, apiroot, $window, $state, balance, SweetAlert, regions) ->
     'ngInject'
     vm = this
 
@@ -27,7 +27,7 @@ angular.module 'frontend'
     $scope.$watch ->
       balance.getBalance()
     , (newVal)->
-      
+
       vm.balance = newVal
 
     $http.get(apiroot+'/api/dashboard')
@@ -39,5 +39,13 @@ angular.module 'frontend'
         $sce.trustAsHtml(data.header[0].column_2),
         $sce.trustAsHtml(data.header[0].column_3)
       ]
+
+    $interval ()->
+      $http.get(apiroot+'/api/dashboard')
+      .success (data)->
+        vm.user = data
+        balance.setBalance data.balance
+    , 60000
+
 
     return

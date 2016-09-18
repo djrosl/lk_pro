@@ -17,7 +17,10 @@
               tr(ng-repeat="field in details.data.fields")
                 td
                   b {{field.field.title}}
-                td {{field.content}}
+                td(ng-if="field.field.type == '4'")
+                  a(ng-repeat="src in details.images(field)" href="{{src}}" tagted="_blank")
+                    img(data-ng-src="{{src}}")
+                td(ng-if="field.field.type != '4'") {{field.content}}
       tr
         td 
           h4 Отчеты

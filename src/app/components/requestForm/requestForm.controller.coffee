@@ -33,7 +33,7 @@ angular.module 'frontend'
         exited = true
 
       return false if exited
-      
+
       ord = angular.copy vm.order
       angular.forEach ord, (order)->
         angular.forEach order.fields, (field, k)->
@@ -79,7 +79,7 @@ angular.module 'frontend'
         if arr1obj then _.extend(arr1obj, arr2obj) else arr1.push(arr2obj)
         return
       return
-    
+
     vm.countToggle = (obj)->
       index = vm.counted obj
       if index < 0
@@ -104,7 +104,7 @@ angular.module 'frontend'
               vm.requiredFields[s.field_id] = parseInt(s.required)
         #vm.isRequired(v.id)
 
-    
+
     $scope.$watch 'slug', (newVal, oldVal)->
       if newVal? and newVal isnt oldVal
         vm.type = {}

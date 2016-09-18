@@ -49,7 +49,7 @@ form.container(ng-hide="!form.loaded")
               .error 
               label.blocked(for="") 
                 |{{field.title}}
-                span.red(ng-if="field.required != '0'") *
+                span.red(ng-if="field.required != '0' && field.required != undefined") *
               input.form-control(type="text", name="", input-mask="'date'" ng-switch-when="1" ng-model="form.subfields[field.id]" ng-required="field.required != '0'")
               .row(ng-switch-when="3")
                 .col-md-6

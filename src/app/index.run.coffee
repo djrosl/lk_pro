@@ -1,5 +1,5 @@
 angular.module 'frontend'
-  .run ($log, $state, $rootScope, $timeout, $location, $anchorScroll, activeLink) ->
+  .run ($log, $state, $rootScope, $timeout, $location, $anchorScroll, activeLink, balance, $http) ->
     'ngInject'
 
     $rootScope.$on '$routeChangeSuccess', (newRoute, oldRoute) ->
@@ -11,7 +11,7 @@ angular.module 'frontend'
       $timeout ->
         $rootScope.loaded = true
       ,100
-    
+
     $rootScope.$on '$stateChangeSuccess', (event, toState, params)->
       if toState.controllerAs is 'orders'
         $state.go 'orders.current'
