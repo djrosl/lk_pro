@@ -128,6 +128,8 @@ angular.module 'frontend'
             console.log v.content
             arr = vm.explode ',', v.content
             vm.subfields[v.field.id] = [moment(arr[0]).format('DD.MM.YYYY'), moment(arr[1]).format('DD.MM.YYYY')]
+          else if parseInt(v.field.type) is 4
+            vm.subfields[v.field.id] = if typeof v.content is 'string' then new Array v.content else v.content
           else
             vm.subfields[v.field.id] = v.content
         angular.forEach reorder.order_buttons, (v)->

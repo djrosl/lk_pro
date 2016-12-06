@@ -21,6 +21,7 @@ angular.module 'frontend'
           angular.forEach array, (item)->
 
             if parseInt(item.payed) is 0
+              console.log 'hui'
               out+=parseInt(item.button.price)
           out = out-balance.getBalance() if out isnt 0
           out
@@ -29,6 +30,13 @@ angular.module 'frontend'
           out = true
           angular.forEach orderbuttons, (item)->
             if item.status isnt '3' and item.status isnt '2'
+              out = false
+          return out
+
+        scope.showCancel = (orderbuttons)->
+          out = true
+          angular.forEach orderbuttons, (item)->
+            if item.status isnt '0' and item.status isnt '4'
               out = false
           return out
 
@@ -53,6 +61,8 @@ angular.module 'frontend'
           $http.post(apiroot+'/api/change-order-status', {id: order.id, status: status})
           .success (s)->
             console.log s
+            ###if(typeof s == 'integer') {
+            }###
             ind = _.findIndex scope.data, order
             scope.data.splice ind, 1
             scope.pagination.pages = Math.ceil(scope.data.length/scope.pagination.per)

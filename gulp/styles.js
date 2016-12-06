@@ -43,7 +43,7 @@ var buildStyles = function() {
   ])
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
-    .pipe($.sourcemaps.init())
+    /*.pipe($.sourcemaps.init())*/
     .pipe($.stylus()).on('error', conf.errorHandler('Stylus'))
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
     .pipe($.sourcemaps.write())

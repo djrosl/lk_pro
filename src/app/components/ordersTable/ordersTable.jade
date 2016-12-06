@@ -46,7 +46,7 @@
               i.fa.fa-archive
               | Переместить в архив
             br(ng-show="showArchive(order.orderbuttons)")
-            button.btn.btn-option(ng-click="changeStatus(order, 0)")
+            button.btn.btn-option(ng-click="changeStatus(order, 0)" ng-if="showCancel(order.orderbuttons)")
               i.fa.fa-ban
               | Отменить заказ
           td(ng-if="type == 'archive'")

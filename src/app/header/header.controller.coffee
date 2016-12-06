@@ -34,11 +34,13 @@ angular.module 'frontend'
     .success (data)->
       vm.user = data
       balance.setBalance data.balance
-      vm.columns = [
+      angular.forEach data.header, (item)->
+        vm.columns.push($sce.trustAsHtml(item.column_1))
+      ###vm.columns = [
         $sce.trustAsHtml(data.header[0].column_1),
         $sce.trustAsHtml(data.header[0].column_2),
         $sce.trustAsHtml(data.header[0].column_3)
-      ]
+      ]###
 
     $interval ()->
       $http.get(apiroot+'/api/dashboard')
