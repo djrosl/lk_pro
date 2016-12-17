@@ -13,8 +13,6 @@ angular.module 'frontend'
 
     vm.images = (field)->
       html=[]
-      field.content.split('$').forEach (item, i)->
-        html.push item
-      html
+      field.content.split('$')
 
     return
